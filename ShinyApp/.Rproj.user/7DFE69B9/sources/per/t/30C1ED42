@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1572642257874.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3048932837",
+    "id" : "30C1ED42",
+    "lastKnownWriteTime" : 1550345151,
+    "last_content_update" : 1550345151,
+    "path" : "~/Downloads/comedor---tp-final-operativa-master/ShinyApp/app/server.R",
+    "project_path" : "app/server.R",
+    "properties" : {
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

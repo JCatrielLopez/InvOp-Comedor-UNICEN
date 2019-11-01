@@ -1,0 +1,117 @@
+library(shiny)
+library(DT)
+library(data.table)
+#library("ff")
+library("RPostgreSQL")
+library(ggplot2)
+library(scales)
+
+shinyServer(function(input, output) {
+
+    # df <- fread('data/movimientos.csv', header = TRUE, sep = ',', data.table = TRUE, showProgress = TRUE, nThread = 3)
+
+    #################################################################################################################################################################################
+    #                                                                                                                                                                               #
+    #                                                               Tab 1: Tablas                                                                                                   #
+    #                                                                                                                                                                               #
+    #################################################################################################################################################################################
+
+    output$relationshipsDiagram = renderImage({
+        list(src = 'data/relationships.real.large.png',
+        contentType = 'image/png',
+        alt = "Relaciones entre las tablas")
+    }, deleteFile = FALSE)
+
+    output$mainTable = DT::renderDataTable({
+        drv <- dbDriver("PostgreSQL")
+        con <- dbConnect(drv, dbname = "postgres",
+                         host = "localhost", port = 5432,
+                         user = "postgres", password = "postgres")
+        on.exit(dbDisconnect(con))
+        rs <- dbGetQuery(con, paste("SELECT * FROM", toString(input$table), "LIMIT 1000", sep=" "))
+
+        DT::datatable(data.table(rs), rownames = FALSE, extensions = 'Buttons',
+                  options = list( dom = 'Bfrtip', buttons = I('colvis') ))
+        })
+
+    on.exit(dbDisconnect(con))
+    #################################################################################################################################################################################
+    #                                                                                                                                                                               #
+    #                                                               Tab 2: Resumen                                                                                                  #
+    #                                                                                                                                                                               #
+    #################################################################################################################################################################################
+
+    #################################################################################################################################################################################
+    #                                                                                                                                                                               #
+    #                                                               Tab 3: Graficos                                                                                                 #
+    #                                                                                                                                                                               #
+    #################################################################################################################################################################################
+
+    output$vyearPlot = renderPlot({
+        data <- read.csv('data/CSVs/ventasanuales.csv', sep=',', header = TRUE, stringsAsFactors = FALSE)
+        ggplot(data=data, aes(x=año, y=ventas,fill = contenido))+
+            coord_cartesian(ylim=c(10000,400000))+
+            scale_y_continuous(labels = comma)+
+            #scale_x_discrete(limits=c("2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018"))+
+            geom_bar(stat="identity", position="dodge")+
+            geom_text(aes(label=ventas), vjust=1.6, color="black", position = position_dodge(0.9), size=4.5)
+    })
+
+    output$vMesPlot = renderPlot({
+        data <- read.csv('data/CSVs/ventasmensuales.csv', sep=',', header = TRUE, stringsAsFactors = FALSE)
+        ggplot(data=data, aes(x=mes, y=ventas,fill = contenido))+
+            coord_cartesian(ylim=c(1000,30000))+
+            scale_y_continuous(labels = comma)+
+            scale_x_discrete(limits=c("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"))+
+            geom_bar(stat="identity", position="dodge")+
+            geom_text(aes(label=ventas), vjust=1.6, color="black", position = position_dodge(0.9), size=4.5)
+    })
+
+    output$vDiaPlot = renderPlot({
+        data <- read.csv('data/CSVs/ventassemanales.csv', sep=',', header = TRUE, stringsAsFactors = FALSE)
+        ggplot(data=data, aes(x=dia, y=ventas,fill = contenido))+
+            coord_cartesian(ylim=c(50,1000))+
+            scale_y_continuous(labels = comma)+
+            scale_x_discrete(limits=c("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"))+
+            geom_bar(stat="identity", position="dodge")+
+            geom_text(aes(label=ventas), vjust=1.6, color="black", position = position_dodge(0.9), size=4.5)
+         })
+
+    output$vHoraPlot = renderPlot({
+        data <- read.csv('data/CSVs/ventasporhora.csv', sep=',', header = TRUE, stringsAsFactors = FALSE)
+        ggplot(data=data, aes(x=hora, y=ventas,fill = contenido))+
+            coord_cartesian(ylim=c(0,200))+
+            scale_y_continuous(labels = comma)+
+            #scale_x_discrete(limits=c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"))+
+            geom_bar(stat="identity", position="dodge")+
+            geom_text(aes(label=ventas), vjust=1.6, color="black", position = position_dodge(0.9), size=4.5)
+    })
+
+    output$fHora = renderPlot({
+        data <- read.csv('data/CSVs/horafacultades.csv', sep=',', header = TRUE, stringsAsFactors = FALSE)
+        ggplot(data=data, aes(x=hora, y=cantidad,fill = facultad))+
+            coord_cartesian(ylim=c(0,60))+
+            scale_y_continuous(labels = comma)+
+            geom_bar(stat="identity", position="dodge")+
+            geom_text(aes(label=cantidad), vjust=1.6, color="black", position = position_dodge(0.9), size=4.5)
+    })
+
+    output$fHora2 = renderPlot({
+        data <- read.csv('data/CSVs/horafacultades2.csv', sep=',', header = TRUE, stringsAsFactors = FALSE)
+        ggplot(data=data, aes(x=hora, y=cantidad,fill = facultad))+
+            coord_cartesian(ylim=c(0,60))+
+            scale_y_continuous(labels = comma)+
+            geom_bar(stat="identity", position="dodge")+
+            geom_text(aes(label=cantidad), vjust=1.6, color="black", position = position_dodge(0.9), size=4.5)
+    })
+    #dbDisconnect(con)
+    #dbUnloadDriver(drv)
+
+
+    #################################################################################################################################################################################
+    #                                                                                                                                                                               #
+    #                                                               Tab 4: Diagrama de relaciones                                                                                                 #
+    #                                                                                                                                                                               #
+    #################################################################################################################################################################################
+
+})

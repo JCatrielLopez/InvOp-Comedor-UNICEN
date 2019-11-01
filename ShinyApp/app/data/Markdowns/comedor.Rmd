@@ -1,0 +1,15 @@
+---
+title: "comedor"
+author: "invop"
+date: "January 23, 2019"
+output: html_document
+---
+
+La configuración del comedor cuenta con dos cajas con una cola compartida, como  se especifica en la FIGURA 1, y una caja automática con una cola aparte. Cada comida se prepara en una cocina conectada a la zona de servicio desde la cual el personal del comedor distribuye cada orden.
+
+Para analizar las transacciones en el comedor, nos centramos en:
+
+* Las transacciones que ocurren entre las **11:00 hs** y las **15:00 hs**, horarios en los cuales se sirve el almuerzo.
+* Las transacciones referidas a productos de almuerzo: menú del día, pizzas, tartas, empanadas, tostados, entre otros. Es decir, **todo producto que requiera un tiempo de elaboración en la cocina e implique un cliente más para la cola de la zona de servicio**.
+* **No se tienen en cuenta tampoco las transacciones que ocurran fuera de los días de semana**. Los fines de semana no aportan datos significativos, ya que el nivel de clientes es considerablemente menor.
+

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>postgres Database</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+  <!-- Bootstrap 3.3.5 -->
+  <link rel="stylesheet" href="bower/admin-lte/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="bower/ionicons/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="bower/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="bower/datatables.net-buttons-bs/css/buttons.bootstrap.min.css">
+  <!-- Code Mirror -->
+  <link rel="stylesheet" href="bower/codemirror/codemirror.css">
+  <!-- Fonts -->
+  <link href='fonts/indieflower/indie-flower.css' rel='stylesheet' type='text/css'>
+  <link href='fonts/source-sans-pro/source-sans-pro.css' rel='stylesheet' type='text/css'>
+
+  <!-- Theme style -->
+  <link rel="stylesheet" href="bower/admin-lte/dist/css/AdminLTE.min.css">
+  <!-- Salvattore -->
+  <link rel="stylesheet" href="bower/salvattore/salvattore.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="bower/admin-lte/dist/css/skins/_all-skins.min.css">
+  <!-- SchemaSpy -->
+  <link rel="stylesheet" href="schemaSpy.css">
+  
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="bower/html5shiv/html5shiv.min.js"></script>
+  <script src="bower/respond/respond.min.js"></script>
+  <![endif]-->
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+  <header class="main-header">
+    <nav class="navbar navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="index.html" class="navbar-brand"><b>postgres</b> Database</a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+            <i class="fa fa-bars"></i>
+          </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Tables <span class="sr-only">(current)</span></a></li>
+			<li><a href="columns.html" title="All of the columns in the schema">Columns</a></li>
+			<li><a href="constraints.html" title="Useful for diagnosing error messages that just give constraint name or number">Constraints</a></li>
+			<li><a href="relationships.html" title="Diagram of table relationships">Relationships</a></li>
+			<li><a href="orphans.html" title="View of tables with neither parents nor children">Orphan&nbsp;Tables</a></li>				
+			<li><a href="anomalies.html" title="Things that might not be quite right">Anomalies</a></li>
+			<li><a href="routines.html" title="Procedures and functions">Routines</a></li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+        <!-- Navbar Right Menu -->
+
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+  </header>
+  <!-- Main content -->
+  <!-- Full Width Column -->
+  <div class="content-wrapper">
+          <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>All Relationships</h1>
+      </section>
+      <!-- Main content -->
+      <section class="content">
+				<div class="box box-primary">		
+			<div class="box-header with-border">
+              <i class="fa fa-code-fork"></i>
+              <h3 class="box-title">Diagrams</h3>
+            </div>	
+			<div class="box-body">	
+			<div class="nav-tabs-custom" style="cursor: move;">
+            <!-- Tabs within a box -->
+			<h5>By default only columns that are primary keys, foreign keys or indexes are shown.</h5>
+            <ul class="nav nav-tabs pull-left ui-sortable-handle">
+			  			              <li class="active"><a href="#compactDegreeImg-chart" data-toggle="tab" aria-expanded="true">Compact</a></li>			  			 
+			  			              <li class=""><a href="#largeDegreeImg-chart" data-toggle="tab" aria-expanded="true">Large</a></li>			  			 
+			  			              <li class=""><a href="#compactimpliedDegreeImg-chart" data-toggle="tab" aria-expanded="true">Compact Implied</a></li>			  			 
+			  			              <li class=""><a href="#largeimpliedDegreeImg-chart" data-toggle="tab" aria-expanded="true">Large Implied</a></li>			  			 
+            </ul>
+            <div class="tab-content no-padding">            
+				<div class="chart tab-pane active" id="compactDegreeImg-chart" style="position: relative; overflow-x:auto;">
+																					<map id="compactRelationshipsDiagram" name="compactRelationshipsDiagram">
+<area shape="rect" id="node1" href="tables/accion.html" title="accion" alt="" coords="1161,773,1329,920">
+<area shape="rect" id="node3" href="tables/caja.html" title="caja" alt="" coords="894,765,1033,912">
+<area shape="rect" id="node2" href="tables/advertencia.html" title="advertencia" alt="" coords="556,1395,752,1541">
+<area shape="rect" id="node32" href="tables/padron.html" title="padron" alt="" coords="270,1347,449,1611">
+<area shape="rect" id="node43" href="tables/unidadgestion.html" title="unidadgestion" alt="" coords="563,704,744,851">
+<area shape="rect" id="node4" href="tables/cambiospadron.html" title="cambiospadron" alt="" coords="559,1839,748,2015">
+<area shape="rect" id="node30" href="tables/migracion.html" title="migracion" alt="" coords="284,2753,435,2871">
+<area shape="rect" id="node5" href="tables/caracteristicacliente.html" title="caracteristicacliente" alt="" coords="249,1728,470,1845">
+<area shape="rect" id="node6" href="tables/caracteristicaclientexpadron.html" title="caracteristicaclientexpadron" alt="" coords="514,1699,793,1821">
+<area shape="rect" id="node7" href="tables/caracteristicas_x_item.html" title="caracteristicas_x_item" alt="" coords="1400,304,1637,421">
+<area shape="rect" id="node27" href="tables/item_caracteristicas.html" title="item_caracteristicas" alt="" coords="1134,304,1356,421">
+<area shape="rect" id="node8" href="tables/cuentacorriente.html" title="cuentacorriente" alt="" coords="14,1141,205,1288">
+<area shape="rect" id="node9" href="tables/dependencia.html" title="dependencia" alt="" coords="25,1305,194,1423">
+<area shape="rect" id="node10" href="tables/dependenciaxpadron.html" title="dependenciaxpadron" alt="" coords="540,868,768,991">
+<area shape="rect" id="node11" href="tables/equipo.html" title="equipo" alt="" coords="894,599,1034,745">
+<area shape="rect" id="node28" href="tables/localidad.html" title="localidad" alt="" coords="288,681,432,799">
+<area shape="rect" id="node12" href="tables/estadotarjeta.html" title="estadotarjeta" alt="" coords="1159,5,1331,123">
+<area shape="rect" id="node13" href="tables/filtro.html" title="filtro" alt="" coords="584,1008,724,1213">
+<area shape="rect" id="node36" href="tables/rango.html" title="rango" alt="" coords="299,1113,420,1231">
+<area shape="rect" id="node39" href="tables/tipocliente.html" title="tipocliente" alt="" coords="33,1584,186,1701">
+<area shape="rect" id="node14" href="tables/filtroxproducto.html" title="filtroxproducto" alt="" coords="871,977,1056,1153">
+<area shape="rect" id="node34" href="tables/producto.html" title="producto" alt="" coords="580,1231,728,1377">
+<area shape="rect" id="node15" href="tables/importagronomia.html" title="importagronomia" alt="" coords="553,2068,754,2215">
+<area shape="rect" id="node16" href="tables/importarte.html" title="importarte" alt="" coords="568,2232,739,2379">
+<area shape="rect" id="node17" href="tables/importderecho.html" title="importderecho" alt="" coords="562,2396,746,2543">
+<area shape="rect" id="node18" href="tables/importecon.html" title="importecon" alt="" coords="568,2560,739,2707">
+<area shape="rect" id="node19" href="tables/importexa.html" title="importexa" alt="" coords="568,2724,739,2871">
+<area shape="rect" id="node20" href="tables/importhum.html" title="importhum" alt="" coords="568,2888,739,3035">
+<area shape="rect" id="node21" href="tables/importing.html" title="importing" alt="" coords="568,3052,739,3199">
+<area shape="rect" id="node22" href="tables/importpampa.html" title="importpampa" alt="" coords="567,3216,740,3363">
+<area shape="rect" id="node23" href="tables/importsoc.html" title="importsoc" alt="" coords="568,3380,739,3527">
+<area shape="rect" id="node24" href="tables/importvet.html" title="importvet" alt="" coords="568,3544,739,3691">
+<area shape="rect" id="node25" href="tables/impresora.html" title="impresora" alt="" coords="1168,475,1322,621">
+<area shape="rect" id="node26" href="tables/item.html" title="item" alt="" coords="876,1335,1052,1481">
+<area shape="rect" id="node29" href="tables/lote.html" title="lote" alt="" coords="1164,140,1326,287">
+<area shape="rect" id="node37" href="tables/sedes.html" title="sedes" alt="" coords="903,169,1024,292">
+<area shape="rect" id="node31" href="tables/movimiento.html" title="movimiento" alt="" coords="1429,685,1608,949">
+<area shape="rect" id="node42" href="tables/tipomovimiento.html" title="tipomovimiento" alt="" coords="1150,639,1340,756">
+<area shape="rect" id="node41" href="tables/tipodocumento.html" title="tipodocumento" alt="" coords="16,1440,203,1557">
+<area shape="rect" id="node33" href="tables/preciotipocliente.html" title="preciotipocliente" alt="" coords="865,1747,1062,1893">
+<area shape="rect" id="node35" href="tables/productoxunidadgestion.html" title="productoxunidadgestion" alt="" coords="837,1171,1090,1317">
+<area shape="rect" id="node38" href="tables/tarjeta.html" title="tarjeta" alt="" coords="1406,81,1630,287">
+<area shape="rect" id="node40" href="tables/tipoclientexpadron.html" title="tipoclientexpadron" alt="" coords="548,1559,760,1681">
+</map>
+
+					<a name='diagram'><img id='compactDegreeImg' src='diagrams/summary/relationships.real.compact.png' usemap='#compactRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
+				</div>
+				<div class="chart tab-pane " id="largeDegreeImg-chart" style="position: relative; overflow-x:auto;">
+																					<map id="largeRelationshipsDiagram" name="largeRelationshipsDiagram">
+<area shape="rect" id="node1" href="tables/accion.html" title="accion" alt="" coords="1163,1231,1331,1559">
+<area shape="rect" id="node3" href="tables/caja.html" title="caja" alt="" coords="896,1356,1035,1537">
+<area shape="rect" id="node2" href="tables/advertencia.html" title="advertencia" alt="" coords="557,1719,753,2047">
+<area shape="rect" id="node32" href="tables/padron.html" title="padron" alt="" coords="272,1684,451,2305">
+<area shape="rect" id="node43" href="tables/unidadgestion.html" title="unidadgestion" alt="" coords="565,1181,746,1421">
+<area shape="rect" id="node4" href="tables/cambiospadron.html" title="cambiospadron" alt="" coords="561,2631,750,2841">
+<area shape="rect" id="node30" href="tables/migracion.html" title="migracion" alt="" coords="286,4393,437,4545">
+<area shape="rect" id="node5" href="tables/caracteristicacliente.html" title="caracteristicacliente" alt="" coords="251,1544,472,1667">
+<area shape="rect" id="node6" href="tables/caracteristicaclientexpadron.html" title="caracteristicaclientexpadron" alt="" coords="516,1579,795,1701">
+<area shape="rect" id="node7" href="tables/caracteristicas_x_item.html" title="caracteristicas_x_item" alt="" coords="1401,540,1639,663">
+<area shape="rect" id="node27" href="tables/item_caracteristicas.html" title="item_caracteristicas" alt="" coords="1136,569,1357,692">
+<area shape="rect" id="node8" href="tables/cuentacorriente.html" title="cuentacorriente" alt="" coords="16,1559,207,1769">
+<area shape="rect" id="node9" href="tables/dependencia.html" title="dependencia" alt="" coords="27,1985,196,2196">
+<area shape="rect" id="node10" href="tables/dependenciaxpadron.html" title="dependenciaxpadron" alt="" coords="541,1439,769,1561">
+<area shape="rect" id="node11" href="tables/equipo.html" title="equipo" alt="" coords="895,1076,1035,1316">
+<area shape="rect" id="node28" href="tables/localidad.html" title="localidad" alt="" coords="289,1203,433,1325">
+<area shape="rect" id="node12" href="tables/estadotarjeta.html" title="estadotarjeta" alt="" coords="1161,113,1333,265">
+<area shape="rect" id="node13" href="tables/filtro.html" title="filtro" alt="" coords="585,2064,725,2275">
+<area shape="rect" id="node36" href="tables/rango.html" title="rango" alt="" coords="301,2359,422,2511">
+<area shape="rect" id="node39" href="tables/tipocliente.html" title="tipocliente" alt="" coords="35,2385,188,2537">
+<area shape="rect" id="node14" href="tables/filtroxproducto.html" title="filtroxproducto" alt="" coords="873,1848,1058,2029">
+<area shape="rect" id="node34" href="tables/producto.html" title="producto" alt="" coords="581,2432,729,2613">
+<area shape="rect" id="node15" href="tables/importagronomia.html" title="importagronomia" alt="" coords="555,3585,756,3913">
+<area shape="rect" id="node16" href="tables/importarte.html" title="importarte" alt="" coords="570,3931,741,4259">
+<area shape="rect" id="node17" href="tables/importderecho.html" title="importderecho" alt="" coords="563,4276,747,4604">
+<area shape="rect" id="node18" href="tables/importecon.html" title="importecon" alt="" coords="570,4621,741,4949">
+<area shape="rect" id="node19" href="tables/importexa.html" title="importexa" alt="" coords="570,4967,741,5295">
+<area shape="rect" id="node20" href="tables/importhum.html" title="importhum" alt="" coords="570,5312,741,5640">
+<area shape="rect" id="node21" href="tables/importing.html" title="importing" alt="" coords="570,5657,741,5985">
+<area shape="rect" id="node22" href="tables/importpampa.html" title="importpampa" alt="" coords="569,6003,742,6331">
+<area shape="rect" id="node23" href="tables/importsoc.html" title="importsoc" alt="" coords="570,2895,741,3223">
+<area shape="rect" id="node24" href="tables/importvet.html" title="importvet" alt="" coords="570,3240,741,3568">
+<area shape="rect" id="node25" href="tables/impresora.html" title="impresora" alt="" coords="1170,944,1323,1213">
+<area shape="rect" id="node26" href="tables/item.html" title="item" alt="" coords="877,2363,1053,2632">
+<area shape="rect" id="node29" href="tables/lote.html" title="lote" alt="" coords="1166,283,1327,523">
+<area shape="rect" id="node37" href="tables/sedes.html" title="sedes" alt="" coords="905,429,1026,552">
+<area shape="rect" id="node31" href="tables/movimiento.html" title="movimiento" alt="" coords="1431,1055,1609,1412">
+<area shape="rect" id="node42" href="tables/tipomovimiento.html" title="tipomovimiento" alt="" coords="1152,745,1341,927">
+<area shape="rect" id="node41" href="tables/tipodocumento.html" title="tipodocumento" alt="" coords="18,1787,205,1968">
+<area shape="rect" id="node33" href="tables/preciotipocliente.html" title="preciotipocliente" alt="" coords="867,2743,1064,2924">
+<area shape="rect" id="node35" href="tables/productoxunidadgestion.html" title="productoxunidadgestion" alt="" coords="839,2047,1092,2345">
+<area shape="rect" id="node38" href="tables/tarjeta.html" title="tarjeta" alt="" coords="1408,77,1632,523">
+<area shape="rect" id="node40" href="tables/tipoclientexpadron.html" title="tipoclientexpadron" alt="" coords="549,2292,761,2415">
+</map>
+
+					<a name='diagram'><img id='largeDegreeImg' src='diagrams/summary/relationships.real.large.png' usemap='#largeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
+				</div>
+				<div class="chart tab-pane " id="compactimpliedDegreeImg-chart" style="position: relative; overflow-x:auto;">
+																											<map id="compactImpliedRelationshipsDiagram" name="compactImpliedRelationshipsDiagram">
+<area shape="rect" id="node1" href="tables/accion.html" title="accion" alt="" coords="934,4057,1102,4204">
+<area shape="rect" id="node4" href="tables/caja.html" title="caja" alt="" coords="673,4368,812,4515">
+<area shape="rect" id="node2" href="tables/advertencia.html" title="advertencia" alt="" coords="920,1219,1116,1365">
+<area shape="rect" id="node34" href="tables/padron.html" title="padron" alt="" coords="653,1301,832,1565">
+<area shape="rect" id="node3" href="tables/aimprimir.html" title="aimprimir" alt="" coords="1539,656,1727,773">
+<area shape="rect" id="node45" href="tables/unidadgestion.html" title="unidadgestion" alt="" coords="397,4507,579,4683">
+<area shape="rect" id="node5" href="tables/cambiospadron.html" title="cambiospadron" alt="" coords="923,1831,1113,2007">
+<area shape="rect" id="node32" href="tables/migracion.html" title="migracion" alt="" coords="667,2985,818,3103">
+<area shape="rect" id="node6" href="tables/caracteristicacliente.html" title="caracteristicacliente" alt="" coords="907,1084,1129,1201">
+<area shape="rect" id="node7" href="tables/caracteristicaclientexpadron.html" title="caracteristicaclientexpadron" alt="" coords="1176,1059,1455,1181">
+<area shape="rect" id="node8" href="tables/caracteristicas_x_item.html" title="caracteristicas_x_item" alt="" coords="1849,5,2087,123">
+<area shape="rect" id="node29" href="tables/item_caracteristicas.html" title="item_caracteristicas" alt="" coords="1523,5,1744,123">
+<area shape="rect" id="node9" href="tables/constantes.html" title="constantes" alt="" coords="5,4513,163,4631">
+<area shape="rect" id="node10" href="tables/cuentacorriente.html" title="cuentacorriente" alt="" coords="923,1383,1113,1529">
+<area shape="rect" id="node11" href="tables/dependencia.html" title="dependencia" alt="" coords="403,707,573,824">
+<area shape="rect" id="node12" href="tables/dependenciaxpadron.html" title="dependenciaxpadron" alt="" coords="904,872,1132,995">
+<area shape="rect" id="node13" href="tables/equipo.html" title="equipo" alt="" coords="673,4676,813,4823">
+<area shape="rect" id="node30" href="tables/localidad.html" title="localidad" alt="" coords="207,4589,351,4712">
+<area shape="rect" id="node14" href="tables/estadotarjeta.html" title="estadotarjeta" alt="" coords="1547,251,1719,368">
+<area shape="rect" id="node15" href="tables/filtro.html" title="filtro" alt="" coords="948,2159,1088,2364">
+<area shape="rect" id="node38" href="tables/rango.html" title="rango" alt="" coords="682,2217,803,2335">
+<area shape="rect" id="node41" href="tables/tipocliente.html" title="tipocliente" alt="" coords="411,1660,565,1777">
+<area shape="rect" id="node16" href="tables/filtroxproducto.html" title="filtroxproducto" alt="" coords="1223,4195,1408,4371">
+<area shape="rect" id="node36" href="tables/producto.html" title="producto" alt="" coords="944,4676,1092,4823">
+<area shape="rect" id="node17" href="tables/importagronomia.html" title="importagronomia" alt="" coords="917,3201,1119,3348">
+<area shape="rect" id="node18" href="tables/importarte.html" title="importarte" alt="" coords="933,3365,1103,3512">
+<area shape="rect" id="node19" href="tables/importderecho.html" title="importderecho" alt="" coords="926,3529,1110,3676">
+<area shape="rect" id="node20" href="tables/importecon.html" title="importecon" alt="" coords="933,3693,1103,3840">
+<area shape="rect" id="node21" href="tables/importexa.html" title="importexa" alt="" coords="933,3857,1103,4004">
+<area shape="rect" id="node22" href="tables/importhum.html" title="importhum" alt="" coords="933,2381,1103,2528">
+<area shape="rect" id="node23" href="tables/importing.html" title="importing" alt="" coords="933,2545,1103,2692">
+<area shape="rect" id="node24" href="tables/importpampa.html" title="importpampa" alt="" coords="931,2709,1105,2856">
+<area shape="rect" id="node25" href="tables/importsoc.html" title="importsoc" alt="" coords="933,2873,1103,3020">
+<area shape="rect" id="node26" href="tables/importvet.html" title="importvet" alt="" coords="933,3037,1103,3184">
+<area shape="rect" id="node27" href="tables/impresora.html" title="impresora" alt="" coords="941,4840,1095,4987">
+<area shape="rect" id="node28" href="tables/item.html" title="item" alt="" coords="1545,4653,1721,4829">
+<area shape="rect" id="node33" href="tables/movimiento.html" title="movimiento" alt="" coords="1226,3913,1405,4177">
+<area shape="rect" id="node31" href="tables/lote.html" title="lote" alt="" coords="1553,492,1714,639">
+<area shape="rect" id="node39" href="tables/sedes.html" title="sedes" alt="" coords="1255,521,1376,644">
+<area shape="rect" id="node44" href="tables/tipomovimiento.html" title="tipomovimiento" alt="" coords="923,2024,1113,2141">
+<area shape="rect" id="node43" href="tables/tipodocumento.html" title="tipodocumento" alt="" coords="395,908,581,1025">
+<area shape="rect" id="node35" href="tables/preciotipocliente.html" title="preciotipocliente" alt="" coords="1217,4388,1414,4535">
+<area shape="rect" id="node37" href="tables/productoxunidadgestion.html" title="productoxunidadgestion" alt="" coords="1189,4552,1442,4699">
+<area shape="rect" id="node40" href="tables/tarjeta.html" title="tarjeta" alt="" coords="1856,433,2080,668">
+<area shape="rect" id="node42" href="tables/tipoclientexpadron.html" title="tipoclientexpadron" alt="" coords="912,1619,1124,1741">
+<area shape="rect" id="node46" href="tables/v_pentaho_cuentacorriente.html" title="v_pentaho_cuentacorriente" alt="" coords="1499,1725,1768,1877">
+<area shape="rect" id="node47" href="tables/v_ubicacionequipo.html" title="v_ubicacionequipo" alt="" coords="625,4257,860,4351">
+<area shape="rect" id="node48" href="tables/vcaja.html" title="vcaja" alt="" coords="949,4324,1087,4447">
+<area shape="rect" id="node49" href="tables/vcajahabcerrada.html" title="vcajahabcerrada" alt="" coords="921,4464,1115,4587">
+<area shape="rect" id="node50" href="tables/vcuentacorriente.html" title="vcuentacorriente" alt="" coords="1217,1360,1413,1453">
+<area shape="rect" id="node51" href="tables/vdependencia.html" title="vdependencia" alt="" coords="655,653,830,747">
+<area shape="rect" id="node52" href="tables/vestadotarjeta.html" title="vestadotarjeta" alt="" coords="1879,251,2057,344">
+<area shape="rect" id="node53" href="tables/vitem.html" title="vitem" alt="" coords="1890,4717,2046,4869">
+<area shape="rect" id="node54" href="tables/vmenu_reservados_dia_actual.html" title="vmenu_reservados_dia_actual" alt="" coords="1823,4577,2113,4700">
+<area shape="rect" id="node55" href="tables/vmenu_reservados_dia_siguiente.html" title="vmenu_reservados_dia_siguiente" alt="" coords="1812,4887,2124,5009">
+<area shape="rect" id="node56" href="tables/vmovimientocaja.html" title="vmovimientocaja" alt="" coords="1535,2857,1731,3039">
+<area shape="rect" id="node57" href="tables/vpadron.html" title="vpadron" alt="" coords="1209,1507,1421,1717">
+<area shape="rect" id="node58" href="tables/vpadronguardar.html" title="vpadronguardar" alt="" coords="1209,831,1421,1041">
+<area shape="rect" id="node59" href="tables/vpadroninactivo.html" title="vpadroninactivo" alt="" coords="1220,661,1411,813">
+<area shape="rect" id="node60" href="tables/vtarjeta.html" title="vtarjeta" alt="" coords="1856,140,2080,233">
+<area shape="rect" id="node61" href="tables/vtipocliente.html" title="vtipocliente" alt="" coords="663,3120,822,3213">
+<area shape="rect" id="node62" href="tables/vtipodocumento.html" title="vtipodocumento" alt="" coords="647,908,839,1001">
+<area shape="rect" id="node63" href="tables/vtipomovimiento.html" title="vtipomovimiento" alt="" coords="1218,2100,1413,2193">
+</map>
+
+					<a name='diagram'><img id='compactimpliedDegreeImg' src='diagrams/summary/relationships.implied.compact.png' usemap='#compactImpliedRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
+				</div>
+				<div class="chart tab-pane " id="largeimpliedDegreeImg-chart" style="position: relative; overflow-x:auto;">
+																											<map id="largeImpliedRelationshipsDiagram" name="largeImpliedRelationshipsDiagram">
+<area shape="rect" id="node1" href="tables/accion.html" title="accion" alt="" coords="934,3805,1102,4133">
+<area shape="rect" id="node4" href="tables/caja.html" title="caja" alt="" coords="673,4456,812,4637">
+<area shape="rect" id="node2" href="tables/advertencia.html" title="advertencia" alt="" coords="920,2304,1116,2632">
+<area shape="rect" id="node34" href="tables/padron.html" title="padron" alt="" coords="653,2379,832,3000">
+<area shape="rect" id="node3" href="tables/aimprimir.html" title="aimprimir" alt="" coords="1539,737,1727,1036">
+<area shape="rect" id="node45" href="tables/unidadgestion.html" title="unidadgestion" alt="" coords="397,4632,579,4872">
+<area shape="rect" id="node5" href="tables/cambiospadron.html" title="cambiospadron" alt="" coords="923,4572,1113,4783">
+<area shape="rect" id="node32" href="tables/migracion.html" title="migracion" alt="" coords="667,6335,818,6487">
+<area shape="rect" id="node6" href="tables/caracteristicacliente.html" title="caracteristicacliente" alt="" coords="907,2164,1129,2287">
+<area shape="rect" id="node7" href="tables/caracteristicaclientexpadron.html" title="caracteristicaclientexpadron" alt="" coords="1176,2247,1455,2369">
+<area shape="rect" id="node8" href="tables/caracteristicas_x_item.html" title="caracteristicas_x_item" alt="" coords="1849,5,2087,128">
+<area shape="rect" id="node29" href="tables/item_caracteristicas.html" title="item_caracteristicas" alt="" coords="1523,35,1744,157">
+<area shape="rect" id="node9" href="tables/constantes.html" title="constantes" alt="" coords="5,4661,163,4784">
+<area shape="rect" id="node10" href="tables/cuentacorriente.html" title="cuentacorriente" alt="" coords="923,2649,1113,2860">
+<area shape="rect" id="node11" href="tables/dependencia.html" title="dependencia" alt="" coords="403,1769,573,1980">
+<area shape="rect" id="node12" href="tables/dependenciaxpadron.html" title="dependenciaxpadron" alt="" coords="904,1916,1132,2039">
+<area shape="rect" id="node13" href="tables/equipo.html" title="equipo" alt="" coords="673,8325,813,8565">
+<area shape="rect" id="node30" href="tables/localidad.html" title="localidad" alt="" coords="207,4749,351,4872">
+<area shape="rect" id="node14" href="tables/estadotarjeta.html" title="estadotarjeta" alt="" coords="1547,568,1719,720">
+<area shape="rect" id="node15" href="tables/filtro.html" title="filtro" alt="" coords="948,3541,1088,3752">
+<area shape="rect" id="node38" href="tables/rango.html" title="rango" alt="" coords="682,3541,803,3693">
+<area shape="rect" id="node41" href="tables/tipocliente.html" title="tipocliente" alt="" coords="411,3049,565,3201">
+<area shape="rect" id="node16" href="tables/filtroxproducto.html" title="filtroxproducto" alt="" coords="1223,4165,1408,4347">
+<area shape="rect" id="node36" href="tables/producto.html" title="producto" alt="" coords="944,8325,1092,8507">
+<area shape="rect" id="node17" href="tables/importagronomia.html" title="importagronomia" alt="" coords="917,6217,1119,6545">
+<area shape="rect" id="node18" href="tables/importarte.html" title="importarte" alt="" coords="933,6563,1103,6891">
+<area shape="rect" id="node19" href="tables/importderecho.html" title="importderecho" alt="" coords="926,6908,1110,7236">
+<area shape="rect" id="node20" href="tables/importecon.html" title="importecon" alt="" coords="933,7253,1103,7581">
+<area shape="rect" id="node21" href="tables/importexa.html" title="importexa" alt="" coords="933,7599,1103,7927">
+<area shape="rect" id="node22" href="tables/importhum.html" title="importhum" alt="" coords="933,7944,1103,8272">
+<area shape="rect" id="node23" href="tables/importing.html" title="importing" alt="" coords="933,4836,1103,5164">
+<area shape="rect" id="node24" href="tables/importpampa.html" title="importpampa" alt="" coords="931,5181,1105,5509">
+<area shape="rect" id="node25" href="tables/importsoc.html" title="importsoc" alt="" coords="933,5527,1103,5855">
+<area shape="rect" id="node26" href="tables/importvet.html" title="importvet" alt="" coords="933,5872,1103,6200">
+<area shape="rect" id="node27" href="tables/impresora.html" title="impresora" alt="" coords="941,8524,1095,8793">
+<area shape="rect" id="node28" href="tables/item.html" title="item" alt="" coords="1545,8040,1721,8309">
+<area shape="rect" id="node33" href="tables/movimiento.html" title="movimiento" alt="" coords="1226,3791,1405,4148">
+<area shape="rect" id="node31" href="tables/lote.html" title="lote" alt="" coords="1553,1053,1714,1293">
+<area shape="rect" id="node39" href="tables/sedes.html" title="sedes" alt="" coords="1255,1200,1376,1323">
+<area shape="rect" id="node44" href="tables/tipomovimiento.html" title="tipomovimiento" alt="" coords="923,3343,1113,3524">
+<area shape="rect" id="node43" href="tables/tipodocumento.html" title="tipodocumento" alt="" coords="395,2092,581,2273">
+<area shape="rect" id="node35" href="tables/preciotipocliente.html" title="preciotipocliente" alt="" coords="1217,4440,1414,4621">
+<area shape="rect" id="node37" href="tables/productoxunidadgestion.html" title="productoxunidadgestion" alt="" coords="1189,6111,1442,6409">
+<area shape="rect" id="node40" href="tables/tarjeta.html" title="tarjeta" alt="" coords="1856,832,2080,1277">
+<area shape="rect" id="node42" href="tables/tipoclientexpadron.html" title="tipoclientexpadron" alt="" coords="912,2913,1124,3036">
+<area shape="rect" id="node46" href="tables/v_pentaho_cuentacorriente.html" title="v_pentaho_cuentacorriente" alt="" coords="1499,3041,1768,3433">
+<area shape="rect" id="node47" href="tables/v_ubicacionequipo.html" title="v_ubicacionequipo" alt="" coords="625,4223,860,4439">
+<area shape="rect" id="node48" href="tables/vcaja.html" title="vcaja" alt="" coords="949,4223,1087,4380">
+<area shape="rect" id="node49" href="tables/vcajahabcerrada.html" title="vcajahabcerrada" alt="" coords="921,4397,1115,4555">
+<area shape="rect" id="node50" href="tables/vcuentacorriente.html" title="vcuentacorriente" alt="" coords="1217,2459,1413,2821">
+<area shape="rect" id="node51" href="tables/vdependencia.html" title="vdependencia" alt="" coords="655,1699,830,1827">
+<area shape="rect" id="node52" href="tables/vestadotarjeta.html" title="vestadotarjeta" alt="" coords="1879,584,2057,712">
+<area shape="rect" id="node53" href="tables/vitem.html" title="vitem" alt="" coords="1890,8040,2046,8344">
+<area shape="rect" id="node54" href="tables/vmenu_reservados_dia_actual.html" title="vmenu_reservados_dia_actual" alt="" coords="1823,7660,2113,8023">
+<area shape="rect" id="node55" href="tables/vmenu_reservados_dia_siguiente.html" title="vmenu_reservados_dia_siguiente" alt="" coords="1812,8361,2124,8724">
+<area shape="rect" id="node56" href="tables/vmovimientocaja.html" title="vmovimientocaja" alt="" coords="1535,3451,1731,3901">
+<area shape="rect" id="node57" href="tables/vpadron.html" title="vpadron" alt="" coords="1209,2839,1421,3348">
+<area shape="rect" id="node58" href="tables/vpadronguardar.html" title="vpadronguardar" alt="" coords="1209,1720,1421,2229">
+<area shape="rect" id="node59" href="tables/vpadroninactivo.html" title="vpadroninactivo" alt="" coords="1220,1340,1411,1703">
+<area shape="rect" id="node60" href="tables/vtarjeta.html" title="vtarjeta" alt="" coords="1856,145,2080,567">
+<area shape="rect" id="node61" href="tables/vtipocliente.html" title="vtipocliente" alt="" coords="663,3161,822,3289">
+<area shape="rect" id="node62" href="tables/vtipodocumento.html" title="vtipodocumento" alt="" coords="647,2092,839,2249">
+<area shape="rect" id="node63" href="tables/vtipomovimiento.html" title="vtipomovimiento" alt="" coords="1218,3437,1413,3565">
+</map>
+
+					<a name='diagram'><img id='largeimpliedDegreeImg' src='diagrams/summary/relationships.implied.large.png' usemap='#largeImpliedRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
+				</div>
+			  			</div>
+			</div>
+		  </div><!-- /.box-body -->
+		</div>
+		      </section>    
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div>
+      <div class="pull-right hidden-xs">
+        <a href="https://github.com/schemaspy/schemaspy" title="GitHub for SchemaSpy"><i class="fa fa-github-square fa-2x"></i></a>
+        <a href="http://stackoverflow.com/questions/tagged/schemaspy" title="StackOverflow for SchemaSpy"><i class="fa fa-stack-overflow fa-2x"></i></a>
+      </div>
+      <strong>Generated by <a href="http://schemaspy.org/" class="logo-text"><i class="fa fa-database"></i> SchemaSpy 6.0.0</a></strong>
+    </div>
+    <!-- /.container -->
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 2.2.3 -->
+<script src="bower/admin-lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="bower/admin-lte/plugins/jQueryUI/jquery-ui.min.js"></script>
+<!-- Bootstrap 3.3.5 -->
+<script src="bower/admin-lte/bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="bower/datatables.net/jquery.dataTables.min.js"></script>
+<script src="bower/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="bower/datatables.net-buttons/dataTables.buttons.min.js"></script>
+<script src="bower/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+<script src="bower/datatables.net-buttons/buttons.html5.min.js"></script>
+<script src="bower/datatables.net-buttons/buttons.print.min.js"></script>
+<script src="bower/datatables.net-buttons/buttons.colVis.min.js"></script>
+<!-- SheetJS -->
+<script src="bower/js-xlsx/xlsx.full.min.js"></script>
+<!-- pdfmake -->
+<script src="bower/pdfmake/pdfmake.min.js"></script>
+<script src="bower/pdfmake/vfs_fonts.js"></script>
+<!-- SlimScroll -->
+<script src="bower/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="bower/admin-lte/plugins/fastclick/fastclick.js"></script>
+<!-- Salvattore -->
+<script src="bower/salvattore/salvattore.min.js"></script>
+<!-- AnchorJS -->
+<script src="bower/anchor-js/anchor.min.js"></script>
+<!-- CodeMirror -->
+<script src="bower/codemirror/codemirror.js"></script>
+<script src="bower/codemirror/sql.js"></script>
+<!-- AdminLTE App -->
+<script src="bower/admin-lte/dist/js/app.min.js"></script>
+<script src="relationships.js"></script>
+<script src="schemaSpy.js"></script>
+</body>
+</html>

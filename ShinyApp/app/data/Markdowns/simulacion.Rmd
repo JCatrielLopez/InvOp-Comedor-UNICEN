@@ -1,0 +1,23 @@
+---
+title: "simulacion"
+author: "invop"
+date: "January 5, 2019"
+output: html_document
+---
+
+Debido a que actualmente la facultad no posee un sistema que registre los tiempos de espera del comedor, se decidió realizar una serie de simulaciones donde se parametrizan estos datos y asi poder analizar distintos resultados. Estos parámetros son:
+
+* Cantidad de cajas operadas por personal. (Sin unidad)
+* Tiempo de atención en cajas. (Minutos)
+* Cantidad de cajas automaticas con tarjeta. (Sin unidad)
+* Cantidad de personas entregando menús. Se considera que los mozos entregan de a dos menus al mismo tiempo. (Sin unidad)
+* Cantidad total de asientos. (Sin unidad)
+* Intervalo de producción de menús. (Minutos)
+* Cantidad de menús cocinados por intervalo. (Sin unidad) 
+
+En este trabajo se plantean dos posibles soluciones para esta situacion:
+
+* La existencia de **turnos por facultad**. Esta solución se simula asignandole distintas franjas horarias a cada facultad, en turnos de una hora de duración, entre las 11hs y las 15hs.
+* La existencia de **turnos por cantidad**. Esta solución, tambien simulada en el trabajo, plantea la posibilidad de que durante un determinado periodo solo se permita la entrada al comedor a una cierta cantidad de personas, para asi evitar la congestion del servicio y los largos tiempos de espera.
+
+Luego de simular cada escenario, incluyendo una simulación del funcionamiento del comedor sin implementar ninguna solución, se puede visualizar un análisis gráfico de las soluciones y los resultados de cada simulación.

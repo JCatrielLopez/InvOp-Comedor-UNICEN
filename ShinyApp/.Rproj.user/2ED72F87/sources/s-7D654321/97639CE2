@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538157411098.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "97639CE2",
+    "lastKnownWriteTime" : 1539466258,
+    "last_content_update" : 1539466258637,
+    "path" : "~/Catriel/Sistemas/Facultad/3 - Tercer año/Investigación Operativa/Trabajo Final/ShinyApp/app/server.R",
+    "project_path" : "app/server.R",
+    "properties" : {
+        "cursorPosition" : "99,51",
+        "scrollLine" : "80"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

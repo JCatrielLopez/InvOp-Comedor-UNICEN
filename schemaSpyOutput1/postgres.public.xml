@@ -1,0 +1,1161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="postgres" schema="public" type="PostgreSQL - 9.1.24">
+   <tables>
+      <table name="accion" numRows="10516" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('accion_naccion_seq'::regclass)" digits="0" id="0" name="naccion" nullable="false" remarks="" size="10" type="serial">
+            <child column="naccion" foreignKey="fk_accion_movimiento" implied="false" onDeleteCascade="false" schema="public" table="movimiento"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="nusuario" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="6" id="2" name="fhinicio" nullable="true" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="2" id="3" name="dineroinicio" nullable="true" remarks="" size="6" type="numeric"/>
+         <column autoUpdated="false" digits="6" id="4" name="fhcierre" nullable="true" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="2" id="5" name="dinerofin" nullable="true" remarks="" size="8" type="numeric"/>
+         <column autoUpdated="false" digits="0" id="6" name="ncaja" nullable="false" remarks="" size="10" type="int4">
+            <child column="ncaja" foreignKey="fk_accion_movimiento" implied="false" onDeleteCascade="false" schema="public" table="movimiento"/>
+            <parent column="ncaja" foreignKey="fk_caja_accion" implied="false" onDeleteCascade="false" schema="public" table="caja"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="tobservacion" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="8" name="nusuariocierre" nullable="true" remarks="" size="10" type="int4"/>
+         <primaryKey column="naccion" sequenceNumberInPK="1"/>
+         <primaryKey column="ncaja" sequenceNumberInPK="2"/>
+         <index name="pk_accion" unique="true">
+            <column ascending="true" name="naccion"/>
+            <column ascending="true" name="ncaja"/>
+         </index>
+      </table>
+      <table name="advertencia" numRows="2" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="tcomentario" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="1" name="fhcomentario" nullable="true" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="0" id="2" name="npadron" nullable="true" remarks="" size="10" type="int4">
+            <parent column="npadron" foreignKey="fk_padron_advertencia" implied="false" onDeleteCascade="false" schema="public" table="padron"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="nusuario" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="true" defaultValue="nextval('advertencia_ncomentario_seq'::regclass)" digits="0" id="4" name="ncomentario" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="5" name="mactivo" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="6" name="tcomentarioactivo" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="6" id="7" name="fhcomentarioactivo" nullable="true" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="0" id="8" name="nusuarioactivo" nullable="true" remarks="" size="10" type="int4"/>
+         <primaryKey column="ncomentario" sequenceNumberInPK="1"/>
+         <index name="pk_advertencia" unique="true">
+            <column ascending="true" name="ncomentario"/>
+         </index>
+      </table>
+      <table name="aimprimir" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dni" nullable="false" remarks="" size="19" type="int8">
+            <child column="dni" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="tarjeta"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="nombre_categoria" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="nombre_facultad" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="nombre1" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="nombre2" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="fecha" nullable="true" remarks="" size="10" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="6" name="nlote" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="7" name="ntarjeta" nullable="true" remarks="" size="10" type="int4"/>
+         <primaryKey column="dni" sequenceNumberInPK="1"/>
+         <index name="pk_aimprimir" unique="true">
+            <column ascending="true" name="dni"/>
+         </index>
+      </table>
+      <table name="caja" numRows="8" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('caja_ncaja_seq'::regclass)" digits="0" id="0" name="ncaja" nullable="false" remarks="" size="10" type="serial">
+            <child column="ncaja" foreignKey="fk_caja_accion" implied="false" onDeleteCascade="false" schema="public" table="accion"/>
+            <child column="ncaja" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vcaja"/>
+            <child column="ncaja" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vcajahabcerrada"/>
+            <child column="ncaja" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vmovimientocaja"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="dcaja" nullable="false" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" defaultValue="true" digits="0" id="2" name="mhabilitado" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="3" name="id_ug" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id_ug" foreignKey="fk_unidadgestion_caja" implied="false" onDeleteCascade="false" schema="public" table="unidadgestion"/>
+         </column>
+         <primaryKey column="ncaja" sequenceNumberInPK="1"/>
+         <index name="pk_caja" unique="true">
+            <column ascending="true" name="ncaja"/>
+         </index>
+      </table>
+      <table name="cambiospadron" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('cambiospadron_id_cambios_seq'::regclass)" digits="0" id="0" name="id_cambios" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="1" name="npadron" nullable="true" remarks="" size="10" type="int4">
+            <parent column="npadron" foreignKey="fk_padron" implied="false" onDeleteCascade="false" schema="public" table="padron"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="nombre_nuevo" nullable="true" remarks="" size="35" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="apellido_nuevo" nullable="true" remarks="" size="35" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="nro_migracion" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="migracion"/>
+         </column>
+         <primaryKey column="id_cambios" sequenceNumberInPK="1"/>
+         <index name="pk_cambios" unique="true">
+            <column ascending="true" name="id_cambios"/>
+         </index>
+      </table>
+      <table name="caracteristicacliente" numRows="9" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('caracteristicacliente_ncaracteristicacliente_seq'::regclass)" digits="0" id="0" name="ncaracteristicacliente" nullable="false" remarks="" size="10" type="serial">
+            <child column="ncaracteristicacliente" foreignKey="fk_caracteristicacliente_tipoclientexpadron" implied="false" onDeleteCascade="false" schema="public" table="caracteristicaclientexpadron"/>
+            <child column="ncaracteristicacliente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vpadron"/>
+            <child column="ncaracteristicacliente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vpadronguardar"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="dcaracteristicacliente" nullable="false" remarks="" size="50" type="varchar"/>
+         <primaryKey column="ncaracteristicacliente" sequenceNumberInPK="1"/>
+         <index name="pk_caracteristicacliente" unique="true">
+            <column ascending="true" name="ncaracteristicacliente"/>
+         </index>
+      </table>
+      <table name="caracteristicaclientexpadron" numRows="22497" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="npadron" nullable="false" remarks="" size="10" type="int4">
+            <parent column="npadron" foreignKey="fk_padron_caracteristicacliente" implied="false" onDeleteCascade="false" schema="public" table="padron"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="ncaracteristicacliente" nullable="false" remarks="" size="10" type="int4">
+            <parent column="ncaracteristicacliente" foreignKey="fk_caracteristicacliente_tipoclientexpadron" implied="false" onDeleteCascade="false" schema="public" table="caracteristicacliente"/>
+         </column>
+         <primaryKey column="npadron" sequenceNumberInPK="1"/>
+         <primaryKey column="ncaracteristicacliente" sequenceNumberInPK="2"/>
+         <index name="caracteristicaclientexpadron_pkey" unique="true">
+            <column ascending="true" name="npadron"/>
+            <column ascending="true" name="ncaracteristicacliente"/>
+         </index>
+      </table>
+      <table name="caracteristicas_x_item" numRows="86643" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="id_item" nullable="false" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="id_caracteristica" nullable="false" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="fk_cracteristicas_item" implied="false" onDeleteCascade="false" schema="public" table="item_caracteristicas"/>
+         </column>
+      </table>
+      <table name="constantes" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="nombre" nullable="false" remarks="" size="2147483647" type="varchar">
+            <child column="nombre" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="localidad"/>
+            <child column="nombre" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="unidadgestion"/>
+            <child column="nombre" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="v_pentaho_cuentacorriente"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="valor" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <primaryKey column="nombre" sequenceNumberInPK="1"/>
+         <index name="pk_constantes" unique="true">
+            <column ascending="true" name="nombre"/>
+         </index>
+      </table>
+      <table name="cuentacorriente" numRows="22488" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="2" id="0" name="credito" nullable="false" remarks="" size="6" type="numeric"/>
+         <column autoUpdated="false" digits="0" id="1" name="mestado" nullable="true" remarks="" size="1" type="bpchar"/>
+         <column autoUpdated="true" defaultValue="nextval('cuentacorriente_ncuentacorriente_seq'::regclass)" digits="0" id="2" name="ncuentacorriente" nullable="false" remarks="" size="10" type="serial">
+            <child column="ncuentacorriente" foreignKey="fk_cuentacorriente_movimiento" implied="false" onDeleteCascade="false" schema="public" table="movimiento"/>
+            <child column="ncuentacorriente" foreignKey="fk_cuentacorriente_padron" implied="false" onDeleteCascade="false" schema="public" table="padron"/>
+            <child column="ncuentacorriente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="v_pentaho_cuentacorriente"/>
+            <child column="ncuentacorriente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vcuentacorriente"/>
+            <child column="ncuentacorriente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vmovimientocaja"/>
+            <child column="ncuentacorriente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vpadron"/>
+            <child column="ncuentacorriente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vpadronguardar"/>
+            <child column="ncuentacorriente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vpadroninactivo"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="npadron" nullable="false" remarks="" size="10" type="int4">
+            <parent column="npadron" foreignKey="fk_cuentacorriente_padron" implied="false" onDeleteCascade="false" schema="public" table="padron"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="mactivo" nullable="true" remarks="" size="1" type="bool"/>
+         <primaryKey column="ncuentacorriente" sequenceNumberInPK="1"/>
+         <index name="pk_cuentacorriente" unique="true">
+            <column ascending="true" name="ncuentacorriente"/>
+         </index>
+         <index name="ncuentacorriente_idx" unique="false">
+            <column ascending="true" name="ncuentacorriente"/>
+         </index>
+      </table>
+      <table name="dependencia" numRows="15" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('dependencia_ndependencia_seq'::regclass)" digits="0" id="0" name="ndependencia" nullable="false" remarks="" size="10" type="serial">
+            <child column="ndependencia" foreignKey="fk_dependencia_dependenciaxpadron" implied="false" onDeleteCascade="false" schema="public" table="dependenciaxpadron"/>
+            <child column="ndependencia" foreignKey="fk_dependencia_padron" implied="false" onDeleteCascade="false" schema="public" table="padron"/>
+            <child column="ndependencia" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vdependencia"/>
+            <child column="ndependencia" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vpadron"/>
+            <child column="ndependencia" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vpadronguardar"/>
+            <child column="ndependencia" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vpadroninactivo"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="ddependencia" nullable="false" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" defaultValue="true" digits="0" id="2" name="mhabilitado" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="3" name="verifica" nullable="true" remarks="si esta en true, es necesario verificar los alumnos pertencientes a esta dependencia, se tienen los datos del guarani" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="4" name="tabla" nullable="true" remarks="nombre de la tabla donde se encuetran los datos para verificar los usuarios" size="25" type="varchar"/>
+         <primaryKey column="ndependencia" sequenceNumberInPK="1"/>
+         <index name="pk_dependencia" unique="true">
+            <column ascending="true" name="ndependencia"/>
+         </index>
+      </table>
+      <table name="dependenciaxpadron" numRows="13629" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="npadron" nullable="false" remarks="" size="10" type="int4">
+            <parent column="npadron" foreignKey="fk_padron_dependenciaxpadron" implied="false" onDeleteCascade="false" schema="public" table="padron"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="ndependencia" nullable="false" remarks="" size="10" type="int4">
+            <parent column="ndependencia" foreignKey="fk_dependencia_dependenciaxpadron" implied="false" onDeleteCascade="false" schema="public" table="dependencia"/>
+         </column>
+         <primaryKey column="npadron" sequenceNumberInPK="1"/>
+         <primaryKey column="ndependencia" sequenceNumberInPK="2"/>
+         <index name="dependenciaxpadron_pkey" unique="true">
+            <column ascending="true" name="npadron"/>
+            <column ascending="true" name="ndependencia"/>
+         </index>
+      </table>
+      <table name="equipo" numRows="21" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('equipo_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
+            <child column="id_equipo" foreignKey="impresora_id_equipo_fkey" implied="false" onDeleteCascade="false" schema="public" table="impresora"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="id_ug" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="equipo_id_ug_fkey" implied="false" onDeleteCascade="false" schema="public" table="localidad"/>
+            <parent column="id_ug" foreignKey="fk_equipo_unidad_gestion" implied="false" onDeleteCascade="false" schema="public" table="unidadgestion"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="descripcion" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="ubicacion" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="ip" nullable="false" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="usuariossh" nullable="false" remarks="" size="2147483647" type="varchar"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="pkEquipo" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="estadotarjeta" numRows="4" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="cestadotarjeta" nullable="false" remarks="" size="1" type="bpchar">
+            <child column="cestadotarjeta" foreignKey="fk_estadotarjeta_tarjeta" implied="false" onDeleteCascade="false" schema="public" table="tarjeta"/>
+            <child column="cestadotarjeta" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vestadotarjeta"/>
+            <child column="cestadotarjeta" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vtarjeta"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="destadotarjeta" nullable="false" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" defaultValue="true" digits="0" id="2" name="mhabilitado" nullable="true" remarks="" size="1" type="bool"/>
+         <primaryKey column="cestadotarjeta" sequenceNumberInPK="1"/>
+         <index name="estadotarjeta_pk" unique="true">
+            <column ascending="true" name="cestadotarjeta"/>
+         </index>
+      </table>
+      <table name="filtro" numRows="24" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('filtro_nfiltro_seq'::regclass)" digits="0" id="0" name="nfiltro" nullable="false" remarks="" size="10" type="serial">
+            <child column="nfiltro" foreignKey="fk_filtro_producto_filtro" implied="false" onDeleteCascade="false" schema="public" table="filtroxproducto"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="ntipocliente" nullable="true" remarks="" size="19" type="int8">
+            <parent column="ntipocliente" foreignKey="fk_filtro_tipocliente" implied="false" onDeleteCascade="false" schema="public" table="tipocliente"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="nrango" nullable="true" remarks="" size="19" type="int8">
+            <parent column="nrango" foreignKey="fk_filtro_rango" implied="false" onDeleteCascade="false" schema="public" table="rango"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="npadron" nullable="true" remarks="" size="19" type="int8">
+            <parent column="npadron" foreignKey="fk_filtro_padron" implied="false" onDeleteCascade="false" schema="public" table="padron"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="parallevar" nullable="true" remarks="" size="1" type="bool"/>
+         <primaryKey column="nfiltro" sequenceNumberInPK="1"/>
+         <index name="pk_filtro" unique="true">
+            <column ascending="true" name="nfiltro"/>
+         </index>
+      </table>
+      <table name="filtroxproducto" numRows="23" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="nproducto" nullable="false" remarks="" size="19" type="int8">
+            <parent column="nproducto" foreignKey="fk_filtro_producto" implied="false" onDeleteCascade="false" schema="public" table="producto"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="nfiltro" nullable="false" remarks="" size="19" type="int8">
+            <parent column="nfiltro" foreignKey="fk_filtro_producto_filtro" implied="false" onDeleteCascade="false" schema="public" table="filtro"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="precio" nullable="false" remarks="" size="131089" type="numeric"/>
+         <column autoUpdated="false" digits="0" id="3" name="id_ug" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id_ug" foreignKey="fk_filtro_producto_unidadgestion" implied="false" onDeleteCascade="false" schema="public" table="unidadgestion"/>
+         </column>
+         <primaryKey column="nproducto" sequenceNumberInPK="1"/>
+         <primaryKey column="nfiltro" sequenceNumberInPK="2"/>
+         <index name="pk_filtroxproducto" unique="true">
+            <column ascending="true" name="nproducto"/>
+            <column ascending="true" name="nfiltro"/>
+         </index>
+      </table>
+      <table name="importagronomia" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('importecon_npadronecon_seq'::regclass)" digits="0" id="0" name="npadronagronomia" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="1" name="escalafon" nullable="true" remarks="" size="15" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="csexo" nullable="true" remarks="" size="1" type="char"/>
+         <column autoUpdated="false" digits="0" id="3" name="dapellido" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="dnombre" nullable="true" remarks="" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="facultad" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="6" name="num_migracion" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="migracion"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="nnrodocumento" nullable="true" remarks="" size="13" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="8" name="tipo_doc" nullable="true" remarks="" size="3" type="varchar"/>
+         <primaryKey column="npadronagronomia" sequenceNumberInPK="1"/>
+         <index name="pk_padronagronomia" unique="true">
+            <column ascending="true" name="npadronagronomia"/>
+         </index>
+      </table>
+      <table name="importarte" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('importarte_npadronarte_seq'::regclass)" digits="0" id="0" name="npadronarte" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="1" name="escalafon" nullable="true" remarks="" size="15" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="csexo" nullable="true" remarks="" size="1" type="char"/>
+         <column autoUpdated="false" digits="0" id="3" name="dapellido" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="dnombre" nullable="true" remarks="" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="facultad" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="6" name="num_migracion" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="migracion"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="nnrodocumento" nullable="true" remarks="" size="13" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="8" name="tipo_doc" nullable="true" remarks="" size="3" type="varchar"/>
+         <primaryKey column="npadronarte" sequenceNumberInPK="1"/>
+         <index name="pk_padronarte" unique="true">
+            <column ascending="true" name="npadronarte"/>
+         </index>
+      </table>
+      <table name="importderecho" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('importecon_npadronecon_seq'::regclass)" digits="0" id="0" name="npadronderecho" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="1" name="escalafon" nullable="true" remarks="" size="15" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="csexo" nullable="true" remarks="" size="1" type="char"/>
+         <column autoUpdated="false" digits="0" id="3" name="dapellido" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="dnombre" nullable="true" remarks="" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="facultad" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="6" name="num_migracion" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="migracion"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="nnrodocumento" nullable="true" remarks="" size="13" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="8" name="tipo_doc" nullable="true" remarks="" size="3" type="varchar"/>
+         <primaryKey column="npadronderecho" sequenceNumberInPK="1"/>
+         <index name="pk_padronderecho" unique="true">
+            <column ascending="true" name="npadronderecho"/>
+         </index>
+      </table>
+      <table name="importecon" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('importecon_npadronecon_seq'::regclass)" digits="0" id="0" name="npadronecon" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="1" name="escalafon" nullable="true" remarks="" size="15" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="csexo" nullable="true" remarks="" size="1" type="char"/>
+         <column autoUpdated="false" digits="0" id="3" name="dapellido" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="dnombre" nullable="true" remarks="" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="facultad" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="6" name="num_migracion" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="migracion"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="nnrodocumento" nullable="true" remarks="" size="13" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="8" name="tipo_doc" nullable="true" remarks="" size="3" type="varchar"/>
+         <primaryKey column="npadronecon" sequenceNumberInPK="1"/>
+         <index name="pk_padronecon" unique="true">
+            <column ascending="true" name="npadronecon"/>
+         </index>
+      </table>
+      <table name="importexa" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('importexa_npadronexa_seq'::regclass)" digits="0" id="0" name="npadronexa" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="1" name="escalafon" nullable="true" remarks="" size="15" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="csexo" nullable="true" remarks="" size="1" type="char"/>
+         <column autoUpdated="false" digits="0" id="3" name="dapellido" nullable="true" remarks="" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="dnombre" nullable="true" remarks="" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="facultad" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="6" name="num_migracion" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="migracion"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="nnrodocumento" nullable="true" remarks="" size="13" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="8" name="tipo_doc" nullable="true" remarks="" size="3" type="varchar"/>
+         <primaryKey column="npadronexa" sequenceNumberInPK="1"/>
+         <index name="pk_padronexa" unique="true">
+            <column ascending="true" name="npadronexa"/>
+         </index>
+      </table>
+      <table name="importhum" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('importhum_npadronhum_seq'::regclass)" digits="0" id="0" name="npadronhum" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="1" name="escalafon" nullable="true" remarks="" size="15" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="csexo" nullable="true" remarks="" size="1" type="char"/>
+         <column autoUpdated="false" digits="0" id="3" name="dapellido" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="dnombre" nullable="true" remarks="" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="facultad" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="6" name="num_migracion" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="migracion"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="nnrodocumento" nullable="true" remarks="" size="13" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="8" name="tipo_doc" nullable="true" remarks="" size="3" type="varchar"/>
+         <primaryKey column="npadronhum" sequenceNumberInPK="1"/>
+         <index name="pk_padronhum" unique="true">
+            <column ascending="true" name="npadronhum"/>
+         </index>
+      </table>
+      <table name="importing" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('importecon_npadronecon_seq'::regclass)" digits="0" id="0" name="npadroning" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="1" name="escalafon" nullable="true" remarks="" size="15" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="csexo" nullable="true" remarks="" size="1" type="char"/>
+         <column autoUpdated="false" digits="0" id="3" name="dapellido" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="dnombre" nullable="true" remarks="" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="facultad" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="6" name="num_migracion" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="migracion"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="nnrodocumento" nullable="true" remarks="" size="13" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="8" name="tipo_doc" nullable="true" remarks="" size="3" type="varchar"/>
+         <primaryKey column="npadroning" sequenceNumberInPK="1"/>
+         <index name="pk_padroning" unique="true">
+            <column ascending="true" name="npadroning"/>
+         </index>
+      </table>
+      <table name="importpadron" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('importpadron_npadron_seq'::regclass)" digits="0" id="0" name="npadron" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="1" name="escalafon" nullable="true" remarks="" size="15" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="csexo" nullable="true" remarks="" size="1" type="char"/>
+         <column autoUpdated="false" digits="0" id="3" name="dapellido" nullable="true" remarks="" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="dnombre" nullable="true" remarks="" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="facultad" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="6" name="nnrodocumento" nullable="true" remarks="" size="13" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="7" name="tipo_doc" nullable="true" remarks="" size="3" type="varchar"/>
+         <primaryKey column="npadron" sequenceNumberInPK="1"/>
+         <index name="pk_importpadron" unique="true">
+            <column ascending="true" name="npadron"/>
+         </index>
+      </table>
+      <table name="importpampa" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('importpampa_npadronpampa_seq'::regclass)" digits="0" id="0" name="npadronpampa" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="1" name="escalafon" nullable="true" remarks="" size="15" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="csexo" nullable="true" remarks="" size="1" type="char"/>
+         <column autoUpdated="false" digits="0" id="3" name="dapellido" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="dnombre" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="facultad" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="6" name="num_migracion" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="migracion"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="nnrodocumento" nullable="true" remarks="" size="13" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="8" name="tipo_doc" nullable="true" remarks="" size="3" type="varchar"/>
+         <primaryKey column="npadronpampa" sequenceNumberInPK="1"/>
+         <index name="pk_padronpampa" unique="true">
+            <column ascending="true" name="npadronpampa"/>
+         </index>
+      </table>
+      <table name="importsoc" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('importecon_npadronecon_seq'::regclass)" digits="0" id="0" name="npadronsoc" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="1" name="escalafon" nullable="true" remarks="" size="15" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="csexo" nullable="true" remarks="" size="1" type="char"/>
+         <column autoUpdated="false" digits="0" id="3" name="dapellido" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="dnombre" nullable="true" remarks="" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="facultad" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="6" name="num_migracion" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="migracion"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="nnrodocumento" nullable="true" remarks="" size="13" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="8" name="tipo_doc" nullable="true" remarks="" size="3" type="varchar"/>
+         <primaryKey column="npadronsoc" sequenceNumberInPK="1"/>
+         <index name="pk_padronsoc" unique="true">
+            <column ascending="true" name="npadronsoc"/>
+         </index>
+      </table>
+      <table name="importvet" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('importvet_npadronvet_seq'::regclass)" digits="0" id="0" name="npadronvet" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="1" name="escalafon" nullable="true" remarks="" size="15" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="csexo" nullable="true" remarks="" size="1" type="char"/>
+         <column autoUpdated="false" digits="0" id="3" name="dapellido" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="dnombre" nullable="true" remarks="" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="facultad" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="6" name="num_migracion" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="migracion"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="nnrodocumento" nullable="true" remarks="" size="13" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="8" name="tipo_doc" nullable="true" remarks="" size="3" type="varchar"/>
+         <primaryKey column="npadronvet" sequenceNumberInPK="1"/>
+         <index name="pk_padronvet" unique="true">
+            <column ascending="true" name="npadronvet"/>
+         </index>
+      </table>
+      <table name="impresora" numRows="15" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="descripcion" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="1" name="modelo" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="true" defaultValue="nextval('impresora_id_seq'::regclass)" digits="0" id="2" name="id" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="3" name="id_equipo" nullable="false" remarks="" size="19" type="int8">
+            <parent column="id" foreignKey="impresora_id_equipo_fkey" implied="false" onDeleteCascade="false" schema="public" table="equipo"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="nombre_cups" nullable="true" remarks="" size="20" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="ctipo" nullable="true" remarks="" size="12" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="6" name="dispositivo" nullable="false" remarks="" size="20" type="varchar"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="pk_impresora" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="item" numRows="3335356" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('item_nitem_seq'::regclass)" digits="0" id="0" name="nitem" nullable="false" remarks="" size="10" type="serial">
+            <child column="nitem" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vitem"/>
+            <child column="nitem" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vmenu_reservados_dia_actual"/>
+            <child column="nitem" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vmenu_reservados_dia_siguiente"/>
+         </column>
+         <column autoUpdated="false" digits="2" id="1" name="total" nullable="false" remarks="" size="8" type="numeric"/>
+         <column autoUpdated="false" defaultValue="true" digits="0" id="2" name="mhabilitado" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="3" name="nmovimiento" nullable="false" remarks="" size="10" type="int4">
+            <parent column="nmovimiento" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="movimiento"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="nproducto" nullable="false" remarks="" size="10" type="int4">
+            <parent column="nproducto" foreignKey="fk_producto_item" implied="false" onDeleteCascade="false" schema="public" table="producto"/>
+         </column>
+         <column autoUpdated="false" digits="2" id="5" name="preciounitario" nullable="false" remarks="Precio unitario del producto al momento de la venta." size="8" type="numeric"/>
+         <column autoUpdated="false" digits="2" id="6" name="cantidad" nullable="false" remarks="Se considera que puede ser fraccionado." size="8" type="numeric"/>
+         <primaryKey column="nitem" sequenceNumberInPK="1"/>
+         <index name="pk_item" unique="true">
+            <column ascending="true" name="nitem"/>
+         </index>
+      </table>
+      <table name="item_caracteristicas" numRows="4" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('item_caracteristicas_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
+            <child column="id_caracteristica" foreignKey="fk_cracteristicas_item" implied="false" onDeleteCascade="false" schema="public" table="caracteristicas_x_item"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="caracteristica" nullable="false" remarks="" size="50" type="varchar"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="pk_itemcaracteristicas" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="localidad" numRows="4" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('localidad_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial">
+            <child column="id_ug" foreignKey="equipo_id_ug_fkey" implied="false" onDeleteCascade="false" schema="public" table="equipo"/>
+            <child column="id_localidad" foreignKey="unidadgestion_id_localidad_fkey" implied="false" onDeleteCascade="false" schema="public" table="unidadgestion"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="nombre" nullable="false" remarks="" size="2147483647" type="varchar">
+            <parent column="nombre" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="constantes"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="pk_localidad" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="lote" numRows="511" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('lote_nlote_seq'::regclass)" digits="0" id="0" name="nlote" nullable="false" remarks="" size="10" type="serial">
+            <child column="nlote" foreignKey="fk_lote_tarjeta" implied="false" onDeleteCascade="false" schema="public" table="tarjeta"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="dlote" nullable="false" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="2" name="fcreado" nullable="true" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" defaultValue="'P'::bpchar" digits="0" id="3" name="cestado" nullable="false" remarks="" size="1" type="bpchar"/>
+         <column autoUpdated="false" digits="6" id="4" name="fcambioestado" nullable="true" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="0" id="5" name="sede" nullable="false" remarks="" size="20" type="varchar">
+            <child column="sede" foreignKey="fk_lote_tarjeta" implied="false" onDeleteCascade="false" schema="public" table="tarjeta"/>
+            <parent column="nombre" foreignKey="sede_fk" implied="false" onDeleteCascade="false" schema="public" table="sedes"/>
+         </column>
+         <primaryKey column="nlote" sequenceNumberInPK="1"/>
+         <primaryKey column="sede" sequenceNumberInPK="2"/>
+         <index name="pk_lote" unique="true">
+            <column ascending="true" name="nlote"/>
+            <column ascending="true" name="sede"/>
+         </index>
+      </table>
+      <table name="migracion" numRows="58" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="6" id="0" name="fecha" nullable="true" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="0" id="1" name="origen" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="true" defaultValue="nextval('migracion_id_migracion_seq'::regclass)" digits="0" id="2" name="id_migracion" nullable="false" remarks="" size="10" type="serial">
+            <child column="nro_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="cambiospadron"/>
+            <child column="num_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="importagronomia"/>
+            <child column="num_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="importarte"/>
+            <child column="num_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="importderecho"/>
+            <child column="num_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="importecon"/>
+            <child column="num_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="importexa"/>
+            <child column="num_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="importhum"/>
+            <child column="num_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="importing"/>
+            <child column="num_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="importpampa"/>
+            <child column="num_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="importsoc"/>
+            <child column="num_migracion" foreignKey="fk_migracion" implied="false" onDeleteCascade="false" schema="public" table="importvet"/>
+         </column>
+         <primaryKey column="id_migracion" sequenceNumberInPK="1"/>
+         <index name="pk_migracion" unique="true">
+            <column ascending="true" name="id_migracion"/>
+         </index>
+      </table>
+      <table name="movimiento" numRows="3731739" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('movimiento_nmovimiento_seq'::regclass)" digits="0" id="0" name="nmovimiento" nullable="false" remarks="" size="10" type="serial">
+            <child column="nmovimiento" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="item"/>
+            <child column="nmovimiento" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="v_pentaho_cuentacorriente"/>
+            <child column="nmovimiento" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vitem"/>
+            <child column="nmovimiento" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vmovimientocaja"/>
+         </column>
+         <column autoUpdated="false" digits="6" id="1" name="fhmovimiento" nullable="true" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="2" id="2" name="total" nullable="false" remarks="" size="8" type="numeric"/>
+         <column autoUpdated="false" digits="0" id="3" name="nusuario" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="4" name="ncuentacorriente" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ncuentacorriente" foreignKey="fk_cuentacorriente_movimiento" implied="false" onDeleteCascade="false" schema="public" table="cuentacorriente"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="5" name="ctipomovimiento" nullable="false" remarks="V: Venta&#10;A: Acreditación&#10;C: Cierre" size="1" type="bpchar">
+            <parent column="ctipomovimiento" foreignKey="fk_tipomovimiento_movimiento" implied="false" onDeleteCascade="false" schema="public" table="tipomovimiento"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="6" name="naccion" nullable="true" remarks="" size="10" type="int4">
+            <parent column="naccion" foreignKey="fk_accion_movimiento" implied="false" onDeleteCascade="false" schema="public" table="accion"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="ncaja" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ncaja" foreignKey="fk_accion_movimiento" implied="false" onDeleteCascade="false" schema="public" table="accion"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="8" name="tobservacion" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="9" name="id_ug" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id_ug" foreignKey="fk_unidadgestion_movimineto" implied="false" onDeleteCascade="false" schema="public" table="unidadgestion"/>
+         </column>
+         <primaryKey column="nmovimiento" sequenceNumberInPK="1"/>
+         <index name="pk_movimineto" unique="true">
+            <column ascending="true" name="nmovimiento"/>
+         </index>
+      </table>
+      <table name="padron" numRows="22497" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('padron_npadron_seq'::regclass)" digits="0" id="0" name="npadron" nullable="false" remarks="" size="10" type="serial">
+            <child column="npadron" foreignKey="fk_padron_advertencia" implied="false" onDeleteCascade="false" schema="public" table="advertencia"/>
+            <child column="npadron" foreignKey="fk_padron" implied="false" onDeleteCascade="false" schema="public" table="cambiospadron"/>
+            <child column="npadron" foreignKey="fk_padron_caracteristicacliente" implied="false" onDeleteCascade="false" schema="public" table="caracteristicaclientexpadron"/>
+            <child column="npadron" foreignKey="fk_cuentacorriente_padron" implied="false" onDeleteCascade="false" schema="public" table="cuentacorriente"/>
+            <child column="npadron" foreignKey="fk_padron_dependenciaxpadron" implied="false" onDeleteCascade="false" schema="public" table="dependenciaxpadron"/>
+            <child column="npadron" foreignKey="fk_filtro_padron" implied="false" onDeleteCascade="false" schema="public" table="filtro"/>
+            <child column="npadron" foreignKey="fk_padron_tipoclientexpadron" implied="false" onDeleteCascade="false" schema="public" table="tipoclientexpadron"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="ncuentacorriente" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ncuentacorriente" foreignKey="fk_cuentacorriente_padron" implied="false" onDeleteCascade="false" schema="public" table="cuentacorriente"/>
+         </column>
+         <column autoUpdated="false" defaultValue="true" digits="0" id="2" name="mhabilitado" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="3" name="nnrodocumento" nullable="false" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="4" name="nescalafon" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="5" name="csexo" nullable="true" remarks="" size="1" type="bpchar"/>
+         <column autoUpdated="false" digits="0" id="6" name="dapellido" nullable="false" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="7" name="dnombre" nullable="false" remarks="" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="8" name="ntipodocumento" nullable="false" remarks="" size="10" type="int4">
+            <parent column="ntipodocumento" foreignKey="fk_tipodocumento_padron" implied="false" onDeleteCascade="false" schema="public" table="tipodocumento"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="9" name="ndependencia" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ndependencia" foreignKey="fk_dependencia_padron" implied="false" onDeleteCascade="false" schema="public" table="dependencia"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="10" name="ntipocliente" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ntipocliente" foreignKey="fk_tipocliente_padron" implied="false" onDeleteCascade="false" schema="public" table="tipocliente"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="11" name="nusuario" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="12" name="fusuario" nullable="true" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="0" id="13" name="id_migracion" nullable="true" remarks="" size="131089" type="numeric"/>
+         <column autoUpdated="false" defaultValue="false" digits="0" id="14" name="mfoto" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="6" id="15" name="ffoto" nullable="true" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="0" id="16" name="email" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="17" name="notificacion" nullable="true" remarks="" size="1" type="bpchar"/>
+         <column autoUpdated="false" defaultValue="false" digits="0" id="18" name="manual" nullable="true" remarks="Si manual esta en true, quiere decir que este usuario fue cargado a mano, esta freezado para cualquier cambio automatico en dependencia o tipo de usuario" size="1" type="bool"/>
+         <primaryKey column="npadron" sequenceNumberInPK="1"/>
+         <index name="pk_padron" unique="true">
+            <column ascending="true" name="npadron"/>
+         </index>
+         <index name="indice_padron_nnrodocumento" unique="false">
+            <column ascending="false" name="nnrodocumento"/>
+         </index>
+         <index name="indice_padron_npadron" unique="false">
+            <column ascending="true" name="npadron"/>
+         </index>
+         <index name="u_nro_doc" unique="true">
+            <column ascending="true" name="nnrodocumento"/>
+         </index>
+         <index name="u_nro_tipo_doc" unique="true">
+            <column ascending="true" name="ntipodocumento"/>
+            <column ascending="true" name="nnrodocumento"/>
+         </index>
+      </table>
+      <table name="preciotipocliente" numRows="6" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="2" id="0" name="precio" nullable="true" remarks="" size="5" type="numeric"/>
+         <column autoUpdated="false" digits="0" id="1" name="ntipocliente" nullable="false" remarks="" size="10" type="int4">
+            <parent column="ntipocliente" foreignKey="fk_tipocliente_preciotipocliente" implied="false" onDeleteCascade="false" schema="public" table="tipocliente"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="nproducto" nullable="false" remarks="" size="10" type="int4">
+            <parent column="nproducto" foreignKey="fk_producto_preciotipocliente" implied="false" onDeleteCascade="false" schema="public" table="producto"/>
+         </column>
+         <column autoUpdated="false" defaultValue="true" digits="0" id="3" name="mhabilitado" nullable="true" remarks="" size="1" type="bool"/>
+         <index name="pk_preciotipocliente" unique="true">
+            <column ascending="true" name="ntipocliente"/>
+            <column ascending="true" name="nproducto"/>
+         </index>
+      </table>
+      <table name="producto" numRows="3270" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('producto_nproducto_seq'::regclass)" digits="0" id="0" name="nproducto" nullable="false" remarks="" size="10" type="serial">
+            <child column="nproducto" foreignKey="fk_filtro_producto" implied="false" onDeleteCascade="false" schema="public" table="filtroxproducto"/>
+            <child column="nproducto" foreignKey="fk_producto_item" implied="false" onDeleteCascade="false" schema="public" table="item"/>
+            <child column="nproducto" foreignKey="fk_producto_preciotipocliente" implied="false" onDeleteCascade="false" schema="public" table="preciotipocliente"/>
+            <child column="nproducto" foreignKey="fk_productoxunidadgestion_producto" implied="false" onDeleteCascade="false" schema="public" table="productoxunidadgestion"/>
+            <child column="nproducto" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vitem"/>
+            <child column="nproducto" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vmenu_reservados_dia_actual"/>
+            <child column="nproducto" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vmenu_reservados_dia_siguiente"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="dproducto" nullable="false" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" defaultValue="true" digits="0" id="2" name="mhabilitado" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="3" name="ccodbarra" nullable="false" remarks="" size="20" type="varchar"/>
+         <primaryKey column="nproducto" sequenceNumberInPK="1"/>
+         <index name="pk_producto" unique="true">
+            <column ascending="true" name="nproducto"/>
+         </index>
+         <index name="indice_prodcuto_nproducto" unique="false">
+            <column ascending="false" name="nproducto"/>
+         </index>
+         <index name="indice_producto_ccodbarra" unique="false">
+            <column ascending="false" name="ccodbarra"/>
+         </index>
+      </table>
+      <table name="productoxunidadgestion" numRows="3272" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="nproducto" nullable="false" remarks="" size="10" type="int4">
+            <parent column="nproducto" foreignKey="fk_productoxunidadgestion_producto" implied="false" onDeleteCascade="false" schema="public" table="producto"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="id_ug" nullable="false" remarks="" size="10" type="int4">
+            <parent column="id_ug" foreignKey="fk_productoxunidadgestion_unidadgestion" implied="false" onDeleteCascade="false" schema="public" table="unidadgestion"/>
+         </column>
+         <column autoUpdated="false" digits="2" id="2" name="precio" nullable="false" remarks="" size="6" type="numeric"/>
+         <column autoUpdated="false" digits="6" id="3" name="fhactualizado" nullable="true" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" defaultValue="true" digits="0" id="4" name="mhabilitado" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" defaultValue="false" digits="0" id="5" name="decocina" nullable="false" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" defaultValue="false" digits="0" id="6" name="borrado" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" defaultValue="false" digits="0" id="7" name="autoventa" nullable="true" remarks="" size="1" type="bool"/>
+         <primaryKey column="nproducto" sequenceNumberInPK="1"/>
+         <primaryKey column="id_ug" sequenceNumberInPK="2"/>
+         <index name="pk_productoxunidadgestion" unique="true">
+            <column ascending="true" name="nproducto"/>
+            <column ascending="true" name="id_ug"/>
+         </index>
+      </table>
+      <table name="rango" numRows="3" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="inicio" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="fin" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="true" defaultValue="nextval('rango_nrango_seq'::regclass)" digits="0" id="2" name="nrango" nullable="false" remarks="" size="10" type="serial">
+            <child column="nrango" foreignKey="fk_filtro_rango" implied="false" onDeleteCascade="false" schema="public" table="filtro"/>
+         </column>
+         <primaryKey column="nrango" sequenceNumberInPK="1"/>
+         <index name="pk_rango" unique="true">
+            <column ascending="true" name="nrango"/>
+         </index>
+      </table>
+      <table name="sedes" numRows="3" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="nombre" nullable="false" remarks="" size="20" type="varchar">
+            <child column="sede" foreignKey="sede_fk" implied="false" onDeleteCascade="false" schema="public" table="lote"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="ip" nullable="false" remarks="" size="15" type="varchar"/>
+         <primaryKey column="nombre" sequenceNumberInPK="1"/>
+         <index name="iplocalidades_pk" unique="true">
+            <column ascending="true" name="nombre"/>
+         </index>
+         <index name="sedes_ip_key" unique="true">
+            <column ascending="true" name="ip"/>
+         </index>
+      </table>
+      <table name="table_swap_stock" numRows="266699" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('table_swap_stock_id_table_swap_stock_seq'::regclass)" digits="0" id="0" name="id_table_swap_stock" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="1" name="id_producto" nullable="true" remarks="" size="131089" type="numeric"/>
+         <column autoUpdated="false" digits="0" id="2" name="tipousuario" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="3" name="cant_unidades" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="4" name="precio_unitario" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="6" id="5" name="fecha" nullable="true" remarks="" size="29" type="timestamp"/>
+         <primaryKey column="id_table_swap_stock" sequenceNumberInPK="1"/>
+         <index name="pk_table_swap_stock" unique="true">
+            <column ascending="true" name="id_table_swap_stock"/>
+         </index>
+      </table>
+      <table name="tarjeta" numRows="16318" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="6" id="0" name="fhcambioestado" nullable="true" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="0" id="1" name="nusuariocambioestado" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" defaultValue="true" digits="0" id="2" name="mhabilitado" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="true" defaultValue="nextval('tarjeta_ntarjeta_seq'::regclass)" digits="0" id="3" name="ntarjeta" nullable="false" remarks="" size="10" type="serial">
+            <child column="ntarjeta" foreignKey="fk_tarjeta_cambioestadotarjeta" implied="false" onDeleteCascade="false" schema="public" table="tarjeta"/>
+            <parent column="ntarjeta" foreignKey="fk_tarjeta_cambioestadotarjeta" implied="false" onDeleteCascade="false" schema="public" table="tarjeta"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="npadron" nullable="false" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" defaultValue="'S'::bpchar" digits="0" id="5" name="cestadotarjeta" nullable="false" remarks="" size="1" type="bpchar">
+            <parent column="cestadotarjeta" foreignKey="fk_estadotarjeta_tarjeta" implied="false" onDeleteCascade="false" schema="public" table="estadotarjeta"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="6" name="nlote" nullable="false" remarks="" size="10" type="int4">
+            <child column="nlote" foreignKey="fk_tarjeta_cambioestadotarjeta" implied="false" onDeleteCascade="false" schema="public" table="tarjeta"/>
+            <parent column="nlote" foreignKey="fk_tarjeta_cambioestadotarjeta" implied="false" onDeleteCascade="false" schema="public" table="tarjeta"/>
+            <parent column="nlote" foreignKey="fk_lote_tarjeta" implied="false" onDeleteCascade="false" schema="public" table="lote"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="dni" nullable="true" remarks="" size="19" type="int8">
+            <parent column="dni" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="aimprimir"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="8" name="nombre_categoria" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="9" name="nombre_facultad" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="10" name="nombre1" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="11" name="nombre2" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="12" name="sede" nullable="false" remarks="" size="20" type="varchar">
+            <child column="sede" foreignKey="fk_tarjeta_cambioestadotarjeta" implied="false" onDeleteCascade="false" schema="public" table="tarjeta"/>
+            <parent column="sede" foreignKey="fk_lote_tarjeta" implied="false" onDeleteCascade="false" schema="public" table="lote"/>
+            <parent column="sede" foreignKey="fk_tarjeta_cambioestadotarjeta" implied="false" onDeleteCascade="false" schema="public" table="tarjeta"/>
+         </column>
+         <primaryKey column="ntarjeta" sequenceNumberInPK="1"/>
+         <primaryKey column="nlote" sequenceNumberInPK="2"/>
+         <primaryKey column="sede" sequenceNumberInPK="3"/>
+         <index name="pk_tarjeta" unique="true">
+            <column ascending="true" name="ntarjeta"/>
+            <column ascending="true" name="nlote"/>
+            <column ascending="true" name="sede"/>
+         </index>
+      </table>
+      <table name="tarjeta_estado" numRows="51333" remarks="Mantiene los cambios de estado de la tarjeta (solicitada,emitada,entregada)" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="6" id="0" name="fhcambioestado" nullable="false" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="0" id="1" name="nusuariocambioestado" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="2" name="cestadotarjeta" nullable="false" remarks="" size="1" type="bpchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="tcomentario" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="ntarjeta" nullable="false" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="5" name="nlote" nullable="false" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="6" name="sede" nullable="true" remarks="" size="20" type="varchar"/>
+         <primaryKey column="fhcambioestado" sequenceNumberInPK="1"/>
+         <primaryKey column="cestadotarjeta" sequenceNumberInPK="2"/>
+         <primaryKey column="ntarjeta" sequenceNumberInPK="3"/>
+         <index name="pk_tarjeta_estado" unique="true">
+            <column ascending="true" name="fhcambioestado"/>
+            <column ascending="true" name="cestadotarjeta"/>
+            <column ascending="true" name="ntarjeta"/>
+         </index>
+      </table>
+      <table name="tipocliente" numRows="8" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('tipocliente_ntipocliente_seq'::regclass)" digits="0" id="0" name="ntipocliente" nullable="false" remarks="" size="10" type="serial">
+            <child column="ntipocliente" foreignKey="fk_filtro_tipocliente" implied="false" onDeleteCascade="false" schema="public" table="filtro"/>
+            <child column="ntipocliente" foreignKey="fk_tipocliente_padron" implied="false" onDeleteCascade="false" schema="public" table="padron"/>
+            <child column="ntipocliente" foreignKey="fk_tipocliente_preciotipocliente" implied="false" onDeleteCascade="false" schema="public" table="preciotipocliente"/>
+            <child column="ntipocliente" foreignKey="fk_tipocliente_tipoclientexpadron" implied="false" onDeleteCascade="false" schema="public" table="tipoclientexpadron"/>
+            <child column="ntipocliente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vpadron"/>
+            <child column="ntipocliente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vpadronguardar"/>
+            <child column="ntipocliente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vtipocliente"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="dtipocliente" nullable="false" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" defaultValue="true" digits="0" id="2" name="mhabilitado" nullable="true" remarks="" size="1" type="bool"/>
+         <primaryKey column="ntipocliente" sequenceNumberInPK="1"/>
+         <index name="pk_tipocliente" unique="true">
+            <column ascending="true" name="ntipocliente"/>
+         </index>
+      </table>
+      <table name="tipoclientexpadron" numRows="13871" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="npadron" nullable="false" remarks="" size="10" type="int4">
+            <parent column="npadron" foreignKey="fk_padron_tipoclientexpadron" implied="false" onDeleteCascade="false" schema="public" table="padron"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="ntipocliente" nullable="false" remarks="" size="10" type="int4">
+            <parent column="ntipocliente" foreignKey="fk_tipocliente_tipoclientexpadron" implied="false" onDeleteCascade="false" schema="public" table="tipocliente"/>
+         </column>
+         <primaryKey column="npadron" sequenceNumberInPK="1"/>
+         <primaryKey column="ntipocliente" sequenceNumberInPK="2"/>
+         <index name="tipoclientexpadron_pkey" unique="true">
+            <column ascending="true" name="npadron"/>
+            <column ascending="true" name="ntipocliente"/>
+         </index>
+      </table>
+      <table name="tipodocumento" numRows="5" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('tipodocumento_ntipodocumento_seq'::regclass)" digits="0" id="0" name="ntipodocumento" nullable="false" remarks="" size="10" type="serial">
+            <child column="ntipodocumento" foreignKey="fk_tipodocumento_padron" implied="false" onDeleteCascade="false" schema="public" table="padron"/>
+            <child column="ntipodocumento" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vpadron"/>
+            <child column="ntipodocumento" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vpadronguardar"/>
+            <child column="ntipodocumento" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vpadroninactivo"/>
+            <child column="ntipodocumento" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vtipodocumento"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="dtipodocumento" nullable="false" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" defaultValue="true" digits="0" id="2" name="mhabilitado" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="3" name="ctipodocumento" nullable="false" remarks="" size="3" type="bpchar"/>
+         <primaryKey column="ntipodocumento" sequenceNumberInPK="1"/>
+         <index name="pk_tipodocumento" unique="true">
+            <column ascending="true" name="ntipodocumento"/>
+         </index>
+      </table>
+      <table name="tipomovimiento" numRows="5" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="ctipomovimiento" nullable="false" remarks="" size="1" type="bpchar">
+            <child column="ctipomovimiento" foreignKey="fk_tipomovimiento_movimiento" implied="false" onDeleteCascade="false" schema="public" table="movimiento"/>
+            <child column="ctipomovimiento" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vmovimientocaja"/>
+            <child column="ctipomovimiento" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vtipomovimiento"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="dtipomovimiento" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" defaultValue="true" digits="0" id="2" name="mhabilitado" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" defaultValue="1" digits="0" id="3" name="naccion" nullable="true" remarks="" size="10" type="int4"/>
+         <primaryKey column="ctipomovimiento" sequenceNumberInPK="1"/>
+         <index name="pk_tipomovimiento" unique="true">
+            <column ascending="true" name="ctipomovimiento"/>
+         </index>
+      </table>
+      <table name="traduccion" numRows="16" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="cnombre" nullable="true" remarks="" size="20" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="1" name="cvalor" nullable="true" remarks="" size="20" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="dtraduccion" nullable="true" remarks="" size="50" type="varchar"/>
+      </table>
+      <table name="unidadgestion" numRows="4" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('unidadgestion_id_ug_seq'::regclass)" digits="0" id="0" name="id_ug" nullable="false" remarks="" size="10" type="serial">
+            <child column="id_ug" foreignKey="fk_unidadgestion_caja" implied="false" onDeleteCascade="false" schema="public" table="caja"/>
+            <child column="id_ug" foreignKey="fk_equipo_unidad_gestion" implied="false" onDeleteCascade="false" schema="public" table="equipo"/>
+            <child column="id_ug" foreignKey="fk_filtro_producto_unidadgestion" implied="false" onDeleteCascade="false" schema="public" table="filtroxproducto"/>
+            <child column="id_ug" foreignKey="fk_unidadgestion_movimineto" implied="false" onDeleteCascade="false" schema="public" table="movimiento"/>
+            <child column="id_ug" foreignKey="fk_productoxunidadgestion_unidadgestion" implied="false" onDeleteCascade="false" schema="public" table="productoxunidadgestion"/>
+            <child column="id_ug" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="v_ubicacionequipo"/>
+            <child column="id_ug" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vcaja"/>
+            <child column="id_ug" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="vcajahabcerrada"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="nombre" nullable="false" remarks="" size="2147483647" type="varchar">
+            <parent column="nombre" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="constantes"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="descripcion" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="8" id="3" name="saldo" nullable="false" remarks="" size="8" type="float4"/>
+         <column autoUpdated="false" digits="0" id="4" name="id_localidad" nullable="false" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="unidadgestion_id_localidad_fkey" implied="false" onDeleteCascade="false" schema="public" table="localidad"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="5" name="url" nullable="true" remarks="" size="50" type="varchar"/>
+         <primaryKey column="id_ug" sequenceNumberInPK="1"/>
+         <index name="pk_unidadgestion" unique="true">
+            <column ascending="true" name="id_ug"/>
+         </index>
+      </table>
+      <table name="v_pentaho_cuentacorriente" numRows="0" remarks="" schema="public" type="VIEW" viewSql="SELECT to_char(mv.fhmovimiento, 'DD'::text) AS dia, to_char(mv.fhmovimiento, 'MM'::text) AS mes, to_char(mv.fhmovimiento, 'YYYY'::text) AS anio, to_char(mv.fhmovimiento, 'YYYY/MM/DD'::text) AS fecha, c.ncuentacorriente, CASE WHEN (mv.ctipomovimiento = 'A'::bpchar) THEN (mv.total * (1)::numeric) WHEN (mv.ctipomovimiento = 'F'::bpchar) THEN (mv.total * (0)::numeric) ELSE (mv.total * ((-1))::numeric) END AS total, CASE WHEN (mv.ctipomovimiento = 'A'::bpchar) THEN 'Carga'::text WHEN (mv.ctipomovimiento = 'V'::bpchar) THEN 'Venta'::text WHEN (mv.ctipomovimiento = 'C'::bpchar) THEN 'Devolución'::text WHEN (mv.ctipomovimiento = 'F'::bpchar) THEN 'Facturación'::text WHEN (mv.ctipomovimiento = 'J'::bpchar) THEN 'Ajuste'::text ELSE NULL::text END AS tipomovimiento, c.credito, p.npadron, (((p.dapellido)::text || ' '::text) || (p.dnombre)::text) AS nombre, CASE WHEN (p.ntipocliente = 1) THEN 'Alumno'::text WHEN (p.ntipocliente = 2) THEN 'Docente'::text WHEN (p.ntipocliente = 3) THEN 'No Docente'::text WHEN (p.ntipocliente = 4) THEN 'Superior'::text WHEN (p.ntipocliente = 5) THEN 'Graduado'::text WHEN (p.ntipocliente = 6) THEN 'Visitante'::text WHEN (p.ntipocliente = 8) THEN 'Factura'::text ELSE NULL::text END AS tipocliente, mv.nmovimiento FROM ((movimiento mv JOIN cuentacorriente c USING (ncuentacorriente)) JOIN padron p USING (npadron));">
+         <column autoUpdated="false" digits="0" id="0" name="dia" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="1" name="mes" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="anio" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="fecha" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="ncuentacorriente" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ncuentacorriente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="cuentacorriente"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="5" name="total" nullable="true" remarks="" size="131089" type="numeric"/>
+         <column autoUpdated="false" digits="0" id="6" name="tipomovimiento" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="2" id="7" name="credito" nullable="true" remarks="" size="6" type="numeric"/>
+         <column autoUpdated="false" digits="0" id="8" name="npadron" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="9" name="nombre" nullable="true" remarks="" size="2147483647" type="text">
+            <parent column="nombre" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="constantes"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="10" name="tipocliente" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="11" name="nmovimiento" nullable="true" remarks="" size="10" type="int4">
+            <parent column="nmovimiento" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="movimiento"/>
+         </column>
+      </table>
+      <table name="v_ubicacionequipo" numRows="0" remarks="" schema="public" type="VIEW" viewSql="SELECT l.nombre AS nombre_localidad, ug.nombre AS nombre_unidad_gestion, ug.id_ug, e.ip, e.id, ug.url FROM ((equipo e JOIN unidadgestion ug ON ((e.id_ug = ug.id_ug))) JOIN localidad l ON ((l.id = ug.id_localidad)));">
+         <column autoUpdated="false" digits="0" id="0" name="nombre_localidad" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="1" name="nombre_unidad_gestion" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="id_ug" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id_ug" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="unidadgestion"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="ip" nullable="true" remarks="" size="2147483647" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="id" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="5" name="url" nullable="true" remarks="" size="50" type="varchar"/>
+      </table>
+      <table name="vcaja" numRows="0" remarks="" schema="public" type="VIEW" viewSql="SELECT caja.ncaja, caja.dcaja, traduccionbool_1.dtraduccion AS mhabilitado, caja.id_ug FROM (caja LEFT JOIN traduccion traduccionbool_1 ON ((((traduccionbool_1.cvalor)::bpchar = (caja.mhabilitado)::character(1)) AND ((traduccionbool_1.cnombre)::text = 'SINO'::text))));">
+         <column autoUpdated="false" digits="0" id="0" name="ncaja" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ncaja" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="caja"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="dcaja" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="mhabilitado" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="id_ug" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id_ug" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="unidadgestion"/>
+         </column>
+      </table>
+      <table name="vcajahabcerrada" numRows="0" remarks="" schema="public" type="VIEW" viewSql="SELECT c.ncaja, c.dcaja, c.mhabilitado, c.id_ug FROM caja c WHERE (c.mhabilitado AND (NOT (EXISTS (SELECT acc.naccion, acc.nusuario, acc.fhinicio, acc.dineroinicio, acc.fhcierre, acc.dinerofin, acc.ncaja, acc.tobservacion FROM accion acc WHERE ((acc.ncaja = c.ncaja) AND (acc.fhcierre IS NULL))))));">
+         <column autoUpdated="false" digits="0" id="0" name="ncaja" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ncaja" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="caja"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="dcaja" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="mhabilitado" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="3" name="id_ug" nullable="true" remarks="" size="10" type="int4">
+            <parent column="id_ug" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="unidadgestion"/>
+         </column>
+      </table>
+      <table name="vcuentacorriente" numRows="0" remarks="" schema="public" type="VIEW" viewSql="SELECT cc.credito, cc.mestado, cc.ncuentacorriente, cc.npadron, cc.mactivo, (((p.dapellido)::text || ', '::text) || (p.dnombre)::text) AS dcliente, p.nnrodocumento, tp.dtipodocumento, (((tp.ctipodocumento)::text || ' '::text) || p.nnrodocumento) AS documento, 'cargar crédito' AS cargar, 'quitar crédito' AS quitar FROM ((cuentacorriente cc JOIN padron p ON ((p.npadron = cc.npadron))) JOIN tipodocumento tp ON ((tp.ntipodocumento = p.ntipodocumento)));">
+         <column autoUpdated="false" digits="2" id="0" name="credito" nullable="true" remarks="" size="6" type="numeric"/>
+         <column autoUpdated="false" digits="0" id="1" name="mestado" nullable="true" remarks="" size="1" type="bpchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="ncuentacorriente" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ncuentacorriente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="cuentacorriente"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="npadron" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="4" name="mactivo" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="5" name="dcliente" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="6" name="nnrodocumento" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="7" name="dtipodocumento" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="8" name="documento" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="9" name="cargar" nullable="true" remarks="" size="2147483647" type="unknown"/>
+         <column autoUpdated="false" digits="0" id="10" name="quitar" nullable="true" remarks="" size="2147483647" type="unknown"/>
+      </table>
+      <table name="vdependencia" numRows="0" remarks="" schema="public" type="VIEW" viewSql="SELECT dependencia.ndependencia, dependencia.ddependencia, traduccionbool_1.dtraduccion AS mhabilitado FROM (dependencia LEFT JOIN traduccion traduccionbool_1 ON ((((traduccionbool_1.cvalor)::bpchar = (dependencia.mhabilitado)::character(1)) AND ((traduccionbool_1.cnombre)::text = 'SINO'::text))));">
+         <column autoUpdated="false" digits="0" id="0" name="ndependencia" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ndependencia" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="dependencia"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="ddependencia" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="mhabilitado" nullable="true" remarks="" size="50" type="varchar"/>
+      </table>
+      <table name="vestadotarjeta" numRows="0" remarks="" schema="public" type="VIEW" viewSql="SELECT estadotarjeta.cestadotarjeta, estadotarjeta.destadotarjeta, traduccionbool_1.dtraduccion AS mhabilitado FROM (estadotarjeta LEFT JOIN traduccion traduccionbool_1 ON ((((traduccionbool_1.cvalor)::bpchar = (estadotarjeta.mhabilitado)::character(1)) AND ((traduccionbool_1.cnombre)::text = 'SINO'::text))));">
+         <column autoUpdated="false" digits="0" id="0" name="cestadotarjeta" nullable="true" remarks="" size="1" type="bpchar">
+            <parent column="cestadotarjeta" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="estadotarjeta"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="destadotarjeta" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="mhabilitado" nullable="true" remarks="" size="50" type="varchar"/>
+      </table>
+      <table name="vitem" numRows="0" remarks="" schema="public" type="VIEW" viewSql="SELECT i.nitem, i.total, i.mhabilitado, i.nmovimiento, i.nproducto, i.preciounitario, i.cantidad, ((i.preciounitario * i.cantidad))::numeric(5,2) AS totalventa, ((COALESCE((p.ccodbarra)::text, ' '::text) || ' - '::text) || (p.dproducto)::text) AS dproducto FROM (item i JOIN producto p ON ((p.nproducto = i.nproducto)));">
+         <column autoUpdated="false" digits="0" id="0" name="nitem" nullable="true" remarks="" size="10" type="int4">
+            <parent column="nitem" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="item"/>
+         </column>
+         <column autoUpdated="false" digits="2" id="1" name="total" nullable="true" remarks="" size="8" type="numeric"/>
+         <column autoUpdated="false" digits="0" id="2" name="mhabilitado" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="3" name="nmovimiento" nullable="true" remarks="" size="10" type="int4">
+            <parent column="nmovimiento" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="movimiento"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="nproducto" nullable="true" remarks="" size="10" type="int4">
+            <parent column="nproducto" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="producto"/>
+         </column>
+         <column autoUpdated="false" digits="2" id="5" name="preciounitario" nullable="true" remarks="" size="8" type="numeric"/>
+         <column autoUpdated="false" digits="2" id="6" name="cantidad" nullable="true" remarks="" size="8" type="numeric"/>
+         <column autoUpdated="false" digits="2" id="7" name="totalventa" nullable="true" remarks="" size="5" type="numeric"/>
+         <column autoUpdated="false" digits="0" id="8" name="dproducto" nullable="true" remarks="" size="2147483647" type="text"/>
+      </table>
+      <table name="vlote" numRows="0" remarks="" schema="public" type="VIEW" viewSql="SELECT l.nlote, l.dlote, l.fcreado, l.cestado, l.fcambioestado, l.sede, s.ip, (SELECT count(1) AS count FROM tarjeta WHERE ((tarjeta.nlote = l.nlote) AND ((tarjeta.sede)::text = (l.sede)::text))) AS total, (SELECT count(1) AS count FROM tarjeta WHERE (((tarjeta.nlote = l.nlote) AND ((tarjeta.sede)::text = (l.sede)::text)) AND (tarjeta.cestadotarjeta = 'I'::bpchar))) AS totalimpresa, (SELECT count(1) AS count FROM tarjeta WHERE (((tarjeta.nlote = l.nlote) AND ((tarjeta.sede)::text = (l.sede)::text)) AND (tarjeta.cestadotarjeta = 'E'::bpchar))) AS totalenproceso, (SELECT count(1) AS count FROM tarjeta WHERE (((tarjeta.nlote = l.nlote) AND ((tarjeta.sede)::text = (l.sede)::text)) AND (tarjeta.cestadotarjeta = 'S'::bpchar))) AS totalsolicitada, (SELECT count(1) AS count FROM tarjeta WHERE (((tarjeta.nlote = l.nlote) AND ((tarjeta.sede)::text = (l.sede)::text)) AND (tarjeta.cestadotarjeta = 'N'::bpchar))) AS totalenviar, to_char(l.fcreado, 'dd/MM/yyyy HH24:mi'::text) AS dfcreado, tr.dtraduccion AS destadolote FROM ((lote l JOIN traduccion tr ON ((((tr.cvalor)::bpchar = l.cestado) AND ((tr.cnombre)::text = 'ESTLOTE'::text)))) JOIN sedes s ON (((s.nombre)::text = (l.sede)::text)));">
+         <column autoUpdated="false" digits="0" id="0" name="nlote" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="dlote" nullable="true" remarks="" size="25" type="varchar"/>
+         <column autoUpdated="false" digits="6" id="2" name="fcreado" nullable="true" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="0" id="3" name="cestado" nullable="true" remarks="" size="1" type="bpchar"/>
+         <column autoUpdated="false" digits="6" id="4" name="fcambioestado" nullable="true" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="0" id="5" name="sede" nullable="true" remarks="" size="20" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="6" name="ip" nullable="true" remarks="" size="15" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="7" name="total" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="8" name="totalimpresa" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="9" name="totalenproceso" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="10" name="totalsolicitada" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="11" name="totalenviar" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="12" name="dfcreado" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="13" name="destadolote" nullable="true" remarks="" size="50" type="varchar"/>
+      </table>
+      <table name="vmenu_reservados_dia_actual" numRows="0" remarks="" schema="public" type="VIEW" viewSql="SELECT i.nproducto, i.cantidad, i.preciounitario, i.total, m.fhmovimiento, prod.dproducto, p.nnrodocumento, p.dnombre, p.dapellido, prod.ccodbarra, i.nitem FROM (((((padron p JOIN cuentacorriente c USING (npadron)) JOIN movimiento m ON ((m.ncuentacorriente = c.ncuentacorriente))) JOIN item i ON ((i.nmovimiento = m.nmovimiento))) JOIN caracteristicas_x_item cxi ON ((cxi.id_item = i.nitem))) JOIN producto prod ON ((prod.nproducto = i.nproducto))) WHERE ((cxi.id_caracteristica = 2) AND (((m.fhmovimiento)::date = ((now() - '1 day'::interval))::date) OR (((m.fhmovimiento)::date = (now())::date) AND (date_part('hour'::text, m.fhmovimiento) &lt; (10)::double precision))));">
+         <column autoUpdated="false" digits="0" id="0" name="nproducto" nullable="true" remarks="" size="10" type="int4">
+            <parent column="nproducto" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="producto"/>
+         </column>
+         <column autoUpdated="false" digits="2" id="1" name="cantidad" nullable="true" remarks="" size="8" type="numeric"/>
+         <column autoUpdated="false" digits="2" id="2" name="preciounitario" nullable="true" remarks="" size="8" type="numeric"/>
+         <column autoUpdated="false" digits="2" id="3" name="total" nullable="true" remarks="" size="8" type="numeric"/>
+         <column autoUpdated="false" digits="6" id="4" name="fhmovimiento" nullable="true" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="0" id="5" name="dproducto" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="6" name="nnrodocumento" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="7" name="dnombre" nullable="true" remarks="" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="8" name="dapellido" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="9" name="ccodbarra" nullable="true" remarks="" size="20" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="10" name="nitem" nullable="true" remarks="" size="10" type="int4">
+            <parent column="nitem" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="item"/>
+         </column>
+      </table>
+      <table name="vmenu_reservados_dia_siguiente" numRows="0" remarks="" schema="public" type="VIEW" viewSql="SELECT i.nproducto, i.cantidad, i.preciounitario, i.total, m.fhmovimiento, prod.dproducto, p.nnrodocumento, p.dnombre, p.dapellido, prod.ccodbarra, i.nitem FROM (((((padron p JOIN cuentacorriente c USING (npadron)) JOIN movimiento m ON ((m.ncuentacorriente = c.ncuentacorriente))) JOIN item i ON ((i.nmovimiento = m.nmovimiento))) JOIN caracteristicas_x_item cxi ON ((cxi.id_item = i.nitem))) JOIN producto prod ON ((prod.nproducto = i.nproducto))) WHERE ((cxi.id_caracteristica = 2) AND (((m.fhmovimiento)::date = (now())::date) AND (date_part('hour'::text, m.fhmovimiento) &gt; (10)::double precision)));">
+         <column autoUpdated="false" digits="0" id="0" name="nproducto" nullable="true" remarks="" size="10" type="int4">
+            <parent column="nproducto" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="producto"/>
+         </column>
+         <column autoUpdated="false" digits="2" id="1" name="cantidad" nullable="true" remarks="" size="8" type="numeric"/>
+         <column autoUpdated="false" digits="2" id="2" name="preciounitario" nullable="true" remarks="" size="8" type="numeric"/>
+         <column autoUpdated="false" digits="2" id="3" name="total" nullable="true" remarks="" size="8" type="numeric"/>
+         <column autoUpdated="false" digits="6" id="4" name="fhmovimiento" nullable="true" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="0" id="5" name="dproducto" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="6" name="nnrodocumento" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="7" name="dnombre" nullable="true" remarks="" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="8" name="dapellido" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="9" name="ccodbarra" nullable="true" remarks="" size="20" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="10" name="nitem" nullable="true" remarks="" size="10" type="int4">
+            <parent column="nitem" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="item"/>
+         </column>
+      </table>
+      <table name="vmovimientocaja" numRows="0" remarks="" schema="public" type="VIEW" viewSql="SELECT tm.dtipomovimiento, mov.nmovimiento, to_char(mov.fhmovimiento, 'dd/MM/yyyy HH24:MI'::text) AS tfhmovimiento, mov.total, mov.fhmovimiento, mov.nusuario, mov.ncuentacorriente, mov.ctipomovimiento, mov.naccion, mov.ncaja, mov.tobservacion, p.nnrodocumento, p.dnombre, p.dapellido FROM (((movimiento mov JOIN tipomovimiento tm ON ((tm.ctipomovimiento = mov.ctipomovimiento))) JOIN cuentacorriente cta ON ((cta.ncuentacorriente = mov.ncuentacorriente))) JOIN padron p ON ((p.npadron = cta.npadron)));">
+         <column autoUpdated="false" digits="0" id="0" name="dtipomovimiento" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="1" name="nmovimiento" nullable="true" remarks="" size="10" type="int4">
+            <parent column="nmovimiento" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="movimiento"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="tfhmovimiento" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="2" id="3" name="total" nullable="true" remarks="" size="8" type="numeric"/>
+         <column autoUpdated="false" digits="6" id="4" name="fhmovimiento" nullable="true" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="0" id="5" name="nusuario" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="6" name="ncuentacorriente" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ncuentacorriente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="cuentacorriente"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="ctipomovimiento" nullable="true" remarks="" size="1" type="bpchar">
+            <parent column="ctipomovimiento" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="tipomovimiento"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="8" name="naccion" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="9" name="ncaja" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ncaja" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="caja"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="10" name="tobservacion" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="11" name="nnrodocumento" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="12" name="dnombre" nullable="true" remarks="" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="13" name="dapellido" nullable="true" remarks="" size="50" type="varchar"/>
+      </table>
+      <table name="vpadron" numRows="0" remarks="" schema="public" type="VIEW" viewSql="SELECT padron.npadron, padron.ncuentacorriente, padron.ndependencia, padron.ntipodocumento, tipodocumento.dtipodocumento, padron.dnombre, padron.dapellido, padron.nnrodocumento, traduccionbool_1.dtraduccion AS dhabilitado, padron.mhabilitado, (((padron.dapellido)::text || ', '::text) || (padron.dnombre)::text) AS dcliente, (((tipodocumento.ctipodocumento)::text || ' '::text) || padron.nnrodocumento) AS documento, padron.ntipocliente, padron.fusuario, padron.manual, caracteristicaclientexpadron.ncaracteristicacliente FROM (((padron JOIN caracteristicaclientexpadron USING (npadron)) LEFT JOIN tipodocumento ON ((tipodocumento.ntipodocumento = padron.ntipodocumento))) LEFT JOIN traduccion traduccionbool_1 ON ((((traduccionbool_1.cvalor)::bpchar = (padron.mhabilitado)::character(1)) AND ((traduccionbool_1.cnombre)::text = 'SINO'::text))));">
+         <column autoUpdated="false" digits="0" id="0" name="npadron" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="ncuentacorriente" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ncuentacorriente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="cuentacorriente"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="ndependencia" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ndependencia" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="dependencia"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="ntipodocumento" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ntipodocumento" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="tipodocumento"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="dtipodocumento" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="dnombre" nullable="true" remarks="" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="6" name="dapellido" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="7" name="nnrodocumento" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="8" name="dhabilitado" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="9" name="mhabilitado" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="10" name="dcliente" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="11" name="documento" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="12" name="ntipocliente" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ntipocliente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="tipocliente"/>
+         </column>
+         <column autoUpdated="false" digits="6" id="13" name="fusuario" nullable="true" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="0" id="14" name="manual" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="15" name="ncaracteristicacliente" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ncaracteristicacliente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="caracteristicacliente"/>
+         </column>
+      </table>
+      <table name="vpadronguardar" numRows="0" remarks="" schema="public" type="VIEW" viewSql="SELECT padron.npadron, padron.ncuentacorriente, padron.mhabilitado, padron.nnrodocumento, padron.nescalafon, padron.csexo, padron.dapellido, padron.dnombre, padron.ntipodocumento, padron.ndependencia, padron.ntipocliente, padron.nusuario, padron.fusuario, ''::text AS ndependencias, ''::text AS ntipoclientes, caracteristicaclientexpadron.ncaracteristicacliente FROM (padron JOIN caracteristicaclientexpadron USING (npadron));">
+         <column autoUpdated="false" digits="0" id="0" name="npadron" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="ncuentacorriente" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ncuentacorriente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="cuentacorriente"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="mhabilitado" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="3" name="nnrodocumento" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="4" name="nescalafon" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="5" name="csexo" nullable="true" remarks="" size="1" type="bpchar"/>
+         <column autoUpdated="false" digits="0" id="6" name="dapellido" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="7" name="dnombre" nullable="true" remarks="" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="8" name="ntipodocumento" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ntipodocumento" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="tipodocumento"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="9" name="ndependencia" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ndependencia" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="dependencia"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="10" name="ntipocliente" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ntipocliente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="tipocliente"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="11" name="nusuario" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="6" id="12" name="fusuario" nullable="true" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="0" id="13" name="ndependencias" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="14" name="ntipoclientes" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="15" name="ncaracteristicacliente" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ncaracteristicacliente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="caracteristicacliente"/>
+         </column>
+      </table>
+      <table name="vpadroninactivo" numRows="0" remarks="" schema="public" type="VIEW" viewSql="SELECT padron.npadron, padron.ncuentacorriente, padron.ndependencia, padron.ntipodocumento, tipodocumento.dtipodocumento, padron.dnombre, padron.dapellido, padron.nnrodocumento, traduccionbool_1.dtraduccion AS mhabilitado, (((padron.dapellido)::text || ', '::text) || (padron.dnombre)::text) AS dcliente, (((tipodocumento.ctipodocumento)::text || ' '::text) || padron.nnrodocumento) AS documento FROM ((padron LEFT JOIN tipodocumento ON ((tipodocumento.ntipodocumento = padron.ntipodocumento))) LEFT JOIN traduccion traduccionbool_1 ON ((((traduccionbool_1.cvalor)::bpchar = (padron.mhabilitado)::character(1)) AND ((traduccionbool_1.cnombre)::text = 'SINO'::text)))) WHERE (EXISTS (SELECT a.tcomentario, a.fhcomentario, a.npadron, a.nusuario, a.ncomentario, a.mactivo, a.tcomentarioactivo, a.fhcomentarioactivo, a.nusuarioactivo FROM advertencia a WHERE ((a.npadron = padron.npadron) AND a.mactivo)));">
+         <column autoUpdated="false" digits="0" id="0" name="npadron" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="1" name="ncuentacorriente" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ncuentacorriente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="cuentacorriente"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="ndependencia" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ndependencia" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="dependencia"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="ntipodocumento" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ntipodocumento" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="tipodocumento"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="dtipodocumento" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="dnombre" nullable="true" remarks="" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="6" name="dapellido" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="7" name="nnrodocumento" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="8" name="mhabilitado" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="9" name="dcliente" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="10" name="documento" nullable="true" remarks="" size="2147483647" type="text"/>
+      </table>
+      <table name="vtarjeta" numRows="0" remarks="" schema="public" type="VIEW" viewSql="SELECT tarj.fhcambioestado, tarj.nusuariocambioestado, tarj.mhabilitado, tarj.ntarjeta, tarj.npadron, tarj.cestadotarjeta, tarj.nlote, ((tarj.nombre1)::text || CASE WHEN ((tarj.nombre2)::text &lt;&gt; ''::text) THEN (' '::text || (tarj.nombre2)::text) ELSE ''::text END) AS dcliente, et.destadotarjeta, CASE WHEN tarj.mhabilitado THEN 'SI'::text ELSE 'NO'::text END AS dhabilitado, tarj.dni AS nnrodocumento, ((l.nlote || ' - '::text) || (l.dlote)::text) AS dlote, tarj.sede FROM ((tarjeta tarj JOIN estadotarjeta et ON ((et.cestadotarjeta = tarj.cestadotarjeta))) LEFT JOIN lote l ON (((l.nlote = tarj.nlote) AND ((l.sede)::text = (tarj.sede)::text))));">
+         <column autoUpdated="false" digits="6" id="0" name="fhcambioestado" nullable="true" remarks="" size="29" type="timestamp"/>
+         <column autoUpdated="false" digits="0" id="1" name="nusuariocambioestado" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="2" name="mhabilitado" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="3" name="ntarjeta" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="4" name="npadron" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="5" name="cestadotarjeta" nullable="true" remarks="" size="1" type="bpchar">
+            <parent column="cestadotarjeta" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="estadotarjeta"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="6" name="nlote" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="7" name="dcliente" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="8" name="destadotarjeta" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="9" name="dhabilitado" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="10" name="nnrodocumento" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="11" name="dlote" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="12" name="sede" nullable="true" remarks="" size="20" type="varchar"/>
+      </table>
+      <table name="vtipocliente" numRows="0" remarks="" schema="public" type="VIEW" viewSql="SELECT tipocliente.ntipocliente, tipocliente.dtipocliente, traduccionbool_1.dtraduccion AS mhabilitado FROM (tipocliente LEFT JOIN traduccion traduccionbool_1 ON ((((traduccionbool_1.cvalor)::bpchar = (tipocliente.mhabilitado)::character(1)) AND ((traduccionbool_1.cnombre)::text = 'SINO'::text))));">
+         <column autoUpdated="false" digits="0" id="0" name="ntipocliente" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ntipocliente" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="tipocliente"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="dtipocliente" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="mhabilitado" nullable="true" remarks="" size="50" type="varchar"/>
+      </table>
+      <table name="vtipodocumento" numRows="0" remarks="" schema="public" type="VIEW" viewSql="SELECT tipodocumento.ntipodocumento, tipodocumento.dtipodocumento, traduccionbool_1.dtraduccion AS mhabilitado, tipodocumento.ctipodocumento FROM (tipodocumento LEFT JOIN traduccion traduccionbool_1 ON ((((traduccionbool_1.cvalor)::bpchar = (tipodocumento.mhabilitado)::character(1)) AND ((traduccionbool_1.cnombre)::text = 'SINO'::text))));">
+         <column autoUpdated="false" digits="0" id="0" name="ntipodocumento" nullable="true" remarks="" size="10" type="int4">
+            <parent column="ntipodocumento" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="tipodocumento"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="dtipodocumento" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="mhabilitado" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="ctipodocumento" nullable="true" remarks="" size="3" type="bpchar"/>
+      </table>
+      <table name="vtipomovimiento" numRows="0" remarks="" schema="public" type="VIEW" viewSql="SELECT tipomovimiento.ctipomovimiento, tipomovimiento.dtipomovimiento, traduccionbool_1.dtraduccion AS mhabilitado FROM (tipomovimiento LEFT JOIN traduccion traduccionbool_1 ON ((((traduccionbool_1.cvalor)::bpchar = (tipomovimiento.mhabilitado)::character(1)) AND ((traduccionbool_1.cnombre)::text = 'SINO'::text))));">
+         <column autoUpdated="false" digits="0" id="0" name="ctipomovimiento" nullable="true" remarks="" size="1" type="bpchar">
+            <parent column="ctipomovimiento" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="tipomovimiento"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="dtipomovimiento" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="mhabilitado" nullable="true" remarks="" size="50" type="varchar"/>
+      </table>
+      <table name="ws_datosusuario" numRows="0" remarks="" schema="public" type="VIEW" viewSql="SELECT padron.nnrodocumento, dependencia.ddependencia, tipocliente.dtipocliente, tipodocumento.dtipodocumento, padron.dnombre, padron.dapellido, (((padron.dapellido)::text || ', '::text) || (padron.dnombre)::text) AS dcliente FROM (((padron LEFT JOIN tipodocumento ON ((tipodocumento.ntipodocumento = padron.ntipodocumento))) LEFT JOIN dependencia ON ((padron.ndependencia = dependencia.ndependencia))) LEFT JOIN tipocliente ON ((tipocliente.ntipocliente = padron.ntipocliente)));">
+         <column autoUpdated="false" digits="0" id="0" name="nnrodocumento" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="1" name="ddependencia" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="dtipocliente" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="dtipodocumento" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="dnombre" nullable="true" remarks="" size="30" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="5" name="dapellido" nullable="true" remarks="" size="50" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="6" name="dcliente" nullable="true" remarks="" size="2147483647" type="text"/>
+      </table>
+   </tables>
+</database>

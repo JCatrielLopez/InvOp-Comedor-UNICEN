@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>padron - postgres Database</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
+  <!-- Bootstrap 3.3.5 -->
+  <link rel="stylesheet" href="../bower/admin-lte/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../bower/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="../bower/ionicons/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../bower/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="../bower/datatables.net-buttons-bs/css/buttons.bootstrap.min.css">
+  <!-- Code Mirror -->
+  <link rel="stylesheet" href="../bower/codemirror/codemirror.css">
+  <!-- Fonts -->
+  <link href='../fonts/indieflower/indie-flower.css' rel='stylesheet' type='text/css'>
+  <link href='../fonts/source-sans-pro/source-sans-pro.css' rel='stylesheet' type='text/css'>
+
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../bower/admin-lte/dist/css/AdminLTE.min.css">
+  <!-- Salvattore -->
+  <link rel="stylesheet" href="../bower/salvattore/salvattore.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="../bower/admin-lte/dist/css/skins/_all-skins.min.css">
+  <!-- SchemaSpy -->
+  <link rel="stylesheet" href="../schemaSpy.css">
+  
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="../bower/html5shiv/html5shiv.min.js"></script>
+  <script src="../bower/respond/respond.min.js"></script>
+  <![endif]-->
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+  <header class="main-header">
+    <nav class="navbar navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../index.html" class="navbar-brand"><b>postgres</b> Database</a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+            <i class="fa fa-bars"></i>
+          </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="../index.html">Tables <span class="sr-only">(current)</span></a></li>
+			<li><a href="../columns.html" title="All of the columns in the schema">Columns</a></li>
+			<li><a href="../constraints.html" title="Useful for diagnosing error messages that just give constraint name or number">Constraints</a></li>
+			<li><a href="../relationships.html" title="Diagram of table relationships">Relationships</a></li>
+			<li><a href="../orphans.html" title="View of tables with neither parents nor children">Orphan&nbsp;Tables</a></li>				
+			<li><a href="../anomalies.html" title="Things that might not be quite right">Anomalies</a></li>
+			<li><a href="../routines.html" title="Procedures and functions">Routines</a></li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+        <!-- Navbar Right Menu -->
+
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+  </header>
+  <!-- Main content -->
+  <!-- Full Width Column -->
+  <div class="content-wrapper">
+          <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>padron</h1></br>
+		      </section>
+      <!-- Main content -->
+      <section class="content">
+		<div class="box box-primary">
+			<div class="box-header with-border">
+			  <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+              <h3 id="Columns" class="box-title">Columns</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>	
+            <div class="box-body">
+				<div class="row">
+					<div id="button_group_one" class="col-md-3 col-sm-6"></div>
+					<div id="button_group_two" class="col-md-2 col-sm-4 pull-right text-right"></div>
+				</div>
+				<table id="standard_table" class="table table-bordered table-striped dataTable" role="grid">
+				<thead align='left'>
+				<tr>
+				  <th>Column</th>
+				  <th>Type</th>
+				  <th>Size</th>
+				  <th title='Are nulls allowed?'>Nulls</th>
+				  <th title='Is column automatically updated?'>Auto</th>
+				  <th title='Default value'>Default</th>
+				  <th title='Columns in tables that reference this column'>Children</th>
+				  <th title='Columns in tables that are referenced by this column'>Parents</th>
+				  <th title='Comments' class="toggle"><span>Comments</span></th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+				 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="npadron">npadron</span></td>
+				 <td>serial</td>
+				 <td>10</td>
+				 <td title=''></td>
+				 <td title='Automatically updated by the database'>√</td>
+				 <td>nextval(&#39;padron_npadron_seq&#39;::regclass)</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				   <tr>
+					<td title="advertencia.npadron references padron.npadron via fk_padron_advertencia">
+						<a href='advertencia.html'>advertencia</a><span class='relatedKey'>.npadron</span>
+					</td>
+					<td class="constraint detail">
+						fk_padron_advertencia <span title='Null on delete:&#10;Foreign key to parent set to NULL when parent deleted'>N</span>
+					</td>
+				   </tr>
+				   <tr>
+					<td title="cambiospadron.npadron references padron.npadron via fk_padron">
+						<a href='cambiospadron.html'>cambiospadron</a><span class='relatedKey'>.npadron</span>
+					</td>
+					<td class="constraint detail">
+						fk_padron <span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span>
+					</td>
+				   </tr>
+				   <tr>
+					<td title="caracteristicaclientexpadron.npadron references padron.npadron via fk_padron_caracteristicacliente">
+						<a href='caracteristicaclientexpadron.html'>caracteristicaclientexpadron</a><span class='relatedKey'>.npadron</span>
+					</td>
+					<td class="constraint detail">
+						fk_padron_caracteristicacliente <span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span>
+					</td>
+				   </tr>
+				   <tr>
+					<td title="cuentacorriente.npadron references padron.npadron via fk_cuentacorriente_padron">
+						<a href='cuentacorriente.html'>cuentacorriente</a><span class='relatedKey'>.npadron</span>
+					</td>
+					<td class="constraint detail">
+						fk_cuentacorriente_padron <span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span>
+					</td>
+				   </tr>
+				   <tr>
+					<td title="dependenciaxpadron.npadron references padron.npadron via fk_padron_dependenciaxpadron">
+						<a href='dependenciaxpadron.html'>dependenciaxpadron</a><span class='relatedKey'>.npadron</span>
+					</td>
+					<td class="constraint detail">
+						fk_padron_dependenciaxpadron <span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span>
+					</td>
+				   </tr>
+				   <tr>
+					<td title="filtro.npadron references padron.npadron via fk_filtro_padron">
+						<a href='filtro.html'>filtro</a><span class='relatedKey'>.npadron</span>
+					</td>
+					<td class="constraint detail">
+						fk_filtro_padron <span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span>
+					</td>
+				   </tr>
+				   <tr>
+					<td title="tipoclientexpadron.npadron references padron.npadron via fk_padron_tipoclientexpadron">
+						<a href='tipoclientexpadron.html'>tipoclientexpadron</a><span class='relatedKey'>.npadron</span>
+					</td>
+					<td class="constraint detail">
+						fk_padron_tipoclientexpadron <span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span>
+					</td>
+				   </tr>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="ncuentacorriente">ncuentacorriente</span></td>
+				 <td>int4</td>
+				 <td>10</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				   <tr>
+					<td title="padron.ncuentacorriente references cuentacorriente.ncuentacorriente via fk_cuentacorriente_padron">
+						<a href='cuentacorriente.html'>cuentacorriente</a><span class='relatedKey'>.ncuentacorriente</span>
+					</td>
+					<td class="constraint detail">
+						fk_cuentacorriente_padron <span title='Null on delete:&#10;Foreign key to parent set to NULL when parent deleted'>N</span>
+					</td>
+				   </tr>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td><span id="mhabilitado">mhabilitado</span></td>
+				 <td>bool</td>
+				 <td>1</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>true</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="nnrodocumento">nnrodocumento</span></td>
+				 <td>int8</td>
+				 <td>19</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td><span id="nescalafon">nescalafon</span></td>
+				 <td>int4</td>
+				 <td>10</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td><span id="csexo">csexo</span></td>
+				 <td>bpchar</td>
+				 <td>1</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td><span id="dapellido">dapellido</span></td>
+				 <td>varchar</td>
+				 <td>50</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td><span id="dnombre">dnombre</span></td>
+				 <td>varchar</td>
+				 <td>30</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="ntipodocumento">ntipodocumento</span></td>
+				 <td>int4</td>
+				 <td>10</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				   <tr>
+					<td title="padron.ntipodocumento references tipodocumento.ntipodocumento via fk_tipodocumento_padron">
+						<a href='tipodocumento.html'>tipodocumento</a><span class='relatedKey'>.ntipodocumento</span>
+					</td>
+					<td class="constraint detail">
+						fk_tipodocumento_padron <span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span>
+					</td>
+				   </tr>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="ndependencia">ndependencia</span></td>
+				 <td>int4</td>
+				 <td>10</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				   <tr>
+					<td title="padron.ndependencia references dependencia.ndependencia via fk_dependencia_padron">
+						<a href='dependencia.html'>dependencia</a><span class='relatedKey'>.ndependencia</span>
+					</td>
+					<td class="constraint detail">
+						fk_dependencia_padron <span title='Null on delete:&#10;Foreign key to parent set to NULL when parent deleted'>N</span>
+					</td>
+				   </tr>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="ntipocliente">ntipocliente</span></td>
+				 <td>int4</td>
+				 <td>10</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				   <tr>
+					<td title="padron.ntipocliente references tipocliente.ntipocliente via fk_tipocliente_padron">
+						<a href='tipocliente.html'>tipocliente</a><span class='relatedKey'>.ntipocliente</span>
+					</td>
+					<td class="constraint detail">
+						fk_tipocliente_padron <span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span>
+					</td>
+				   </tr>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td><span id="nusuario">nusuario</span></td>
+				 <td>int4</td>
+				 <td>10</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td><span id="fusuario">fusuario</span></td>
+				 <td>timestamp</td>
+				 <td>29,6</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>now()</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td><span id="id_migracion">id_migracion</span></td>
+				 <td>numeric</td>
+				 <td>131089</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td><span id="mfoto">mfoto</span></td>
+				 <td>bool</td>
+				 <td>1</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>false</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td><span id="ffoto">ffoto</span></td>
+				 <td>timestamp</td>
+				 <td>29,6</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td><span id="email">email</span></td>
+				 <td>text</td>
+				 <td>2147483647</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td><span id="notificacion">notificacion</span></td>
+				 <td>bpchar</td>
+				 <td>1</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td><span id="manual">manual</span></td>
+				 <td>bool</td>
+				 <td>1</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>false</td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>				 
+				 </td>
+				 <td>
+				  <table border='0' cellspacing='0' cellpadding='0'>
+				  </table>					 
+				 </td>
+				 <td><p>Si manual esta en true, quiere decir que este usuario fue cargado a mano, esta freezado para cualquier cambio automatico en dependencia o tipo de usuario</p></td>
+				</tr>
+								</tbody>
+				</table>
+				<p title='19 columns'>Table contained <span id="recordNumber">22497</span> rows<p/>
+			</div>
+		</div>
+		<div class="box box-primary">		
+			<div class="box-header with-border">
+              <i class="fa fa-sitemap"></i>
+
+              <h3 id="Indexes" class="box-title">Indexes</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>	
+			<div class="box-body">
+				<table id="indexes_table" class="table table-bordered table-striped dataTable" role="grid">
+				<thead>
+				 <tr>
+				  <th>Constraint Name</th>
+				  <th>Type</th>
+				  <th>Sort</th>
+				  <th>Column(s)</th>
+				 </tr>
+				</thead>
+				<tbody>
+				 <tr>
+				  <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey'></i> pk_padron</td>
+				  <td>Primary key</td>
+				  <td><span title='Ascending'>Asc</span></td>
+				  <td>npadron</td>
+				 </tr>				 
+				 <tr>
+				  <td title='Indexed'>indice_padron_nnrodocumento</td>
+				  <td>Performance</td>
+				  <td><span title='Descending'>Desc</span></td>
+				  <td>nnrodocumento</td>
+				 </tr>				 
+				 <tr>
+				  <td title='Indexed'>indice_padron_npadron</td>
+				  <td>Performance</td>
+				  <td><span title='Ascending'>Asc</span></td>
+				  <td>npadron</td>
+				 </tr>				 
+				 <tr>
+				  <td class='uniqueKey' title='Unique Key'><i class='icon ion-key iconkey'></i> u_nro_doc</td>
+				  <td>Must be unique</td>
+				  <td><span title='Ascending'>Asc</span></td>
+				  <td>nnrodocumento</td>
+				 </tr>				 
+				 <tr>
+				  <td class='uniqueKey' title='Unique Key'><i class='icon ion-key iconkey'></i> u_nro_tipo_doc</td>
+				  <td>Must be unique</td>
+				  <td><span title='Ascending'>Asc</span>/<span title='Ascending'>Asc</span></td>
+				  <td>ntipodocumento + nnrodocumento</td>
+				 </tr>				 
+				</tbody>
+				</table>   			  
+			</div><!-- /.box-body -->
+		</div>
+				<div class="box box-primary">		
+			<div class="box-header with-border">
+              <i class="fa fa-code-fork"></i>
+
+              <h3 id="Relationships" class="box-title">Relationships</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>	
+			<div class="box-body">	
+			<div class="nav-tabs-custom" style="cursor: move;">
+            <!-- Tabs within a box -->
+			<h5>Close relationships within degrees of separation</h5>
+            <ul class="nav nav-tabs pull-left ui-sortable-handle">
+			  			              <li class="active"><a href="#oneDegreeImg-chart" data-toggle="tab" aria-expanded="true">One</a></li>			  			 
+			  			              <li class=""><a href="#twodegreesDegreeImg-chart" data-toggle="tab" aria-expanded="true">Two degrees</a></li>			  			 
+			  			              <li class=""><a href="#oneimpliedDegreeImg-chart" data-toggle="tab" aria-expanded="true">One implied</a></li>			  			 
+			  			              <li class=""><a href="#twoimpliedDegreeImg-chart" data-toggle="tab" aria-expanded="true">Two implied</a></li>			  			 
+            </ul>
+            <div class="tab-content no-padding">            
+				<div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">					
+					<map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
+<area shape="rect" id="node1" href="advertencia.html" title="advertencia" alt="" coords="638,5,834,152">
+<area shape="rect" id="node2" href="padron.html" title="padron" alt="" coords="249,219,553,845">
+<area shape="rect" id="node5" href="cuentacorriente.html" title="cuentacorriente" alt="" coords="14,221,205,368">
+<area shape="rect" id="node7" href="dependencia.html" title="dependencia" alt="" coords="25,657,194,775">
+<area shape="rect" id="node9" href="tipocliente.html" title="tipocliente" alt="" coords="33,859,186,976">
+<area shape="rect" id="node10" href="tipodocumento.html" title="tipodocumento" alt="" coords="16,456,203,573">
+<area shape="rect" id="node3" href="cambiospadron.html" title="cambiospadron" alt="" coords="642,169,831,345">
+<area shape="rect" id="node4" href="caracteristicaclientexpadron.html" title="caracteristicaclientexpadron" alt="" coords="597,363,876,485">
+<area shape="rect" id="node6" href="dependenciaxpadron.html" title="dependenciaxpadron" alt="" coords="622,503,850,625">
+<area shape="rect" id="node8" href="filtro.html" title="filtro" alt="" coords="666,643,806,848">
+<area shape="rect" id="node11" href="tipoclientexpadron.html" title="tipoclientexpadron" alt="" coords="630,865,842,988">
+</map>
+
+					<a name='diagram'><img id='oneDegreeImg' src='../diagrams/padron.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
+				</div>
+				<div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">					
+					<map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
+<area shape="rect" id="node1" href="advertencia.html" title="advertencia" alt="" coords="638,375,834,521">
+<area shape="rect" id="node2" href="padron.html" title="padron" alt="" coords="249,252,553,879">
+<area shape="rect" id="node7" href="cuentacorriente.html" title="cuentacorriente" alt="" coords="14,223,205,369">
+<area shape="rect" id="node9" href="dependencia.html" title="dependencia" alt="" coords="25,521,194,639">
+<area shape="rect" id="node12" href="tipocliente.html" title="tipocliente" alt="" coords="33,928,186,1045">
+<area shape="rect" id="node15" href="tipodocumento.html" title="tipodocumento" alt="" coords="16,387,203,504">
+<area shape="rect" id="node3" href="cambiospadron.html" title="cambiospadron" alt="" coords="642,181,831,357">
+<area shape="rect" id="node4" href="migracion.html" title="migracion" alt="" coords="326,147,476,235">
+<area shape="rect" id="node5" href="caracteristicaclientexpadron.html" title="caracteristicaclientexpadron" alt="" coords="597,869,876,992">
+<area shape="rect" id="node6" href="caracteristicacliente.html" title="caracteristicacliente" alt="" coords="290,1037,512,1125">
+<area shape="rect" id="node8" href="dependenciaxpadron.html" title="dependenciaxpadron" alt="" coords="622,41,850,164">
+<area shape="rect" id="node10" href="filtro.html" title="filtro" alt="" coords="666,1073,806,1279">
+<area shape="rect" id="node11" href="rango.html" title="rango" alt="" coords="340,1179,462,1267">
+<area shape="rect" id="node13" href="filtroxproducto.html" title="filtroxproducto" alt="" coords="920,1076,1105,1164">
+<area shape="rect" id="node14" href="movimiento.html" title="movimiento" alt="" coords="313,5,489,93">
+<area shape="rect" id="node16" href="preciotipocliente.html" title="preciotipocliente" alt="" coords="302,896,500,984">
+<area shape="rect" id="node17" href="tipoclientexpadron.html" title="tipoclientexpadron" alt="" coords="630,603,842,725">
+</map>
+
+					<a name='diagram'><img id='twodegreesDegreeImg' src='../diagrams/padron.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
+				</div>
+				<div class="chart tab-pane " id="oneimpliedDegreeImg-chart" style="position: relative; overflow-x:auto;">					
+					<map id="oneDegreeRelationshipsDiagramImplied" name="oneDegreeRelationshipsDiagramImplied">
+<area shape="rect" id="node1" href="advertencia.html" title="advertencia" alt="" coords="638,5,834,152">
+<area shape="rect" id="node2" href="padron.html" title="padron" alt="" coords="249,219,553,845">
+<area shape="rect" id="node5" href="cuentacorriente.html" title="cuentacorriente" alt="" coords="14,221,205,368">
+<area shape="rect" id="node7" href="dependencia.html" title="dependencia" alt="" coords="25,657,194,775">
+<area shape="rect" id="node9" href="tipocliente.html" title="tipocliente" alt="" coords="33,859,186,976">
+<area shape="rect" id="node10" href="tipodocumento.html" title="tipodocumento" alt="" coords="16,456,203,573">
+<area shape="rect" id="node3" href="cambiospadron.html" title="cambiospadron" alt="" coords="642,169,831,345">
+<area shape="rect" id="node4" href="caracteristicaclientexpadron.html" title="caracteristicaclientexpadron" alt="" coords="597,363,876,485">
+<area shape="rect" id="node6" href="dependenciaxpadron.html" title="dependenciaxpadron" alt="" coords="622,503,850,625">
+<area shape="rect" id="node8" href="filtro.html" title="filtro" alt="" coords="666,643,806,848">
+<area shape="rect" id="node11" href="tipoclientexpadron.html" title="tipoclientexpadron" alt="" coords="630,865,842,988">
+</map>
+
+					<a name='diagram'><img id='oneimpliedDegreeImg' src='../diagrams/padron.implied1degrees.png' usemap='#oneDegreeRelationshipsDiagramImplied' class='diagram' border='0' alt='' align='left'></a>							
+				</div>
+				<div class="chart tab-pane " id="twoimpliedDegreeImg-chart" style="position: relative; overflow-x:auto;">					
+					<map id="twoDegreesRelationshipsDiagramImplied" name="twoDegreesRelationshipsDiagramImplied">
+<area shape="rect" id="node1" href="advertencia.html" title="advertencia" alt="" coords="660,402,856,549">
+<area shape="rect" id="node2" href="padron.html" title="padron" alt="" coords="271,400,575,1026">
+<area shape="rect" id="node7" href="cuentacorriente.html" title="cuentacorriente" alt="" coords="21,316,211,462">
+<area shape="rect" id="node9" href="dependencia.html" title="dependencia" alt="" coords="31,802,201,920">
+<area shape="rect" id="node12" href="tipocliente.html" title="tipocliente" alt="" coords="39,1365,193,1482">
+<area shape="rect" id="node15" href="tipodocumento.html" title="tipodocumento" alt="" coords="23,1097,209,1214">
+<area shape="rect" id="node3" href="cambiospadron.html" title="cambiospadron" alt="" coords="663,1650,853,1826">
+<area shape="rect" id="node4" href="migracion.html" title="migracion" alt="" coords="347,1769,498,1857">
+<area shape="rect" id="node5" href="caracteristicaclientexpadron.html" title="caracteristicaclientexpadron" alt="" coords="619,697,897,820">
+<area shape="rect" id="node6" href="caracteristicacliente.html" title="caracteristicacliente" alt="" coords="5,1232,227,1320">
+<area shape="rect" id="node8" href="dependenciaxpadron.html" title="dependenciaxpadron" alt="" coords="644,242,872,365">
+<area shape="rect" id="node10" href="filtro.html" title="filtro" alt="" coords="688,1372,828,1577">
+<area shape="rect" id="node11" href="rango.html" title="rango" alt="" coords="362,1664,483,1752">
+<area shape="rect" id="node13" href="filtroxproducto.html" title="filtroxproducto" alt="" coords="941,1374,1127,1462">
+<area shape="rect" id="node14" href="movimiento.html" title="movimiento" alt="" coords="329,141,517,229">
+<area shape="rect" id="node16" href="preciotipocliente.html" title="preciotipocliente" alt="" coords="324,1558,521,1646">
+<area shape="rect" id="node17" href="tipoclientexpadron.html" title="tipoclientexpadron" alt="" coords="652,1100,864,1222">
+<area shape="rect" id="node18" href="v_pentaho_cuentacorriente.html" title="v_pentaho_cuentacorriente" alt="" coords="623,29,893,93">
+<area shape="rect" id="node19" href="vcuentacorriente.html" title="vcuentacorriente" alt="" coords="325,60,521,124">
+<area shape="rect" id="node20" href="vdependencia.html" title="vdependencia" alt="" coords="335,1044,510,1108">
+<area shape="rect" id="node21" href="vmovimientocaja.html" title="vmovimientocaja" alt="" coords="660,152,856,216">
+<area shape="rect" id="node22" href="vpadron.html" title="vpadron" alt="" coords="355,1125,491,1189">
+<area shape="rect" id="node23" href="vpadronguardar.html" title="vpadronguardar" alt="" coords="327,1206,518,1270">
+<area shape="rect" id="node24" href="vpadroninactivo.html" title="vpadroninactivo" alt="" coords="327,318,518,382">
+<area shape="rect" id="node25" href="vtipocliente.html" title="vtipocliente" alt="" coords="343,1477,502,1541">
+<area shape="rect" id="node26" href="vtipodocumento.html" title="vtipodocumento" alt="" coords="327,1288,519,1352">
+</map>
+
+					<a name='diagram'><img id='twoimpliedDegreeImg' src='../diagrams/padron.implied2degrees.png' usemap='#twoDegreesRelationshipsDiagramImplied' class='diagram' border='0' alt='' align='left'></a>							
+				</div>
+			  			</div>
+			</div>
+		  </div><!-- /.box-body -->
+		</div>
+	      </section>
+    
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div>
+      <div class="pull-right hidden-xs">
+        <a href="https://github.com/schemaspy/schemaspy" title="GitHub for SchemaSpy"><i class="fa fa-github-square fa-2x"></i></a>
+        <a href="http://stackoverflow.com/questions/tagged/schemaspy" title="StackOverflow for SchemaSpy"><i class="fa fa-stack-overflow fa-2x"></i></a>
+      </div>
+      <strong>Generated by <a href="http://schemaspy.org/" class="logo-text"><i class="fa fa-database"></i> SchemaSpy 6.0.0</a></strong>
+    </div>
+    <!-- /.container -->
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 2.2.3 -->
+<script src="../bower/admin-lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="../bower/admin-lte/plugins/jQueryUI/jquery-ui.min.js"></script>
+<!-- Bootstrap 3.3.5 -->
+<script src="../bower/admin-lte/bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="../bower/datatables.net/jquery.dataTables.min.js"></script>
+<script src="../bower/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="../bower/datatables.net-buttons/dataTables.buttons.min.js"></script>
+<script src="../bower/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+<script src="../bower/datatables.net-buttons/buttons.html5.min.js"></script>
+<script src="../bower/datatables.net-buttons/buttons.print.min.js"></script>
+<script src="../bower/datatables.net-buttons/buttons.colVis.min.js"></script>
+<!-- SheetJS -->
+<script src="../bower/js-xlsx/xlsx.full.min.js"></script>
+<!-- pdfmake -->
+<script src="../bower/pdfmake/pdfmake.min.js"></script>
+<script src="../bower/pdfmake/vfs_fonts.js"></script>
+<!-- SlimScroll -->
+<script src="../bower/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="../bower/admin-lte/plugins/fastclick/fastclick.js"></script>
+<!-- Salvattore -->
+<script src="../bower/salvattore/salvattore.min.js"></script>
+<!-- AnchorJS -->
+<script src="../bower/anchor-js/anchor.min.js"></script>
+<!-- CodeMirror -->
+<script src="../bower/codemirror/codemirror.js"></script>
+<script src="../bower/codemirror/sql.js"></script>
+<!-- AdminLTE App -->
+<script src="../bower/admin-lte/dist/js/app.min.js"></script>
+<script src="table.js"></script>
+<script src="../schemaSpy.js"></script>
+</body>
+</html>

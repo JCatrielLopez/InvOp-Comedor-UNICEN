@@ -1,0 +1,77 @@
+library(shiny)
+library(shinyjs)
+
+shinyUI(
+    navbarPage("Inv. Op 2018",
+        tabPanel("Datos",
+            sidebarLayout(
+                sidebarPanel(
+                    conditionalPanel(
+                        condition = 'input.tabs === "0"',
+                        selectInput("table", "Seleccionar la tabla a mostrar:",
+                                    choices = c("accion", "advertencia", "caja", "caracteristicacliente",
+                                                "caracteristicaclienteporpadron", "caracteristicas_x_item",
+                                                "cuentacorriente", "movimiento", "item", "table_swap_stock", "tarjeta_estado",
+                                                "padron", "tarjeta", "tipoclientexpadron",
+                                                "dependenciaxpadron", "producto", "productoxunidadgestion", "lote",
+                                                "migracion", "filtro", "filtroxproducto", "equipo", "traduccion",
+                                                "dependencia", "tipocliente", "preciotipocliente", "tipomovimiento",
+                                                "item_caracteristicas", "localidad", "unidadgestion",
+                                                "rango", "sedes"))
+                    ),
+                    conditionalPanel(
+                        condition = 'input.tabs === "1"',
+                        h2("Resumen de los datos")
+                    ),
+                    conditionalPanel(
+                        condition = 'input.tabs === "2"',
+                        h2("Graficos de los datos"),
+                        hr()
+                    )
+                ),
+
+                mainPanel(
+                    tabsetPanel( id = "tabs",
+                        tabPanel("Tabla", value = "0", fluidRow(
+                                column(10, br()),
+                                column(10, DT::dataTableOutput("mainTable"))
+                                )
+                        ),
+                        tabPanel("Resumen", value = "1", fluidRow(
+                                column(10, br()),
+                                column(10, h2("Relacion entre las tablas"))
+                                #column(10, imageOutput("tableoutput"))
+                                )
+                        ),
+                        tabPanel("Graficos", value = "2", fluidRow(
+                                column(10, br()),
+                                column(10, h2("Ventas por año")),
+                                column(10, plotOutput("vyearPlot")),
+                                column(10, br()),
+                                column(10, h2("Ventas por mes")),
+                                column(10, plotOutput("vMesPlot")),
+                                column(10, br()),
+                                column(10, h2("Ventas por dia")),
+                                column(10, plotOutput("vDiaPlot")),
+                                column(10, br()),
+                                column(10, h2("Ventas por hora")),
+                                column(10, plotOutput("vHoraPlot")),
+                                column(10, br()),
+                                column(10, h2("Distribucion de FACULTADES por HORA (1C)")),
+                                column(10, plotOutput("fHora")),
+                                column(10,br()),
+                                column(10, h2("Distribucion de FACULTADES por HORA (2C)")),
+                                column(10, plotOutput("fHora2")),
+                                column(10,br())
+                                )
+                        )
+                    )
+                )
+            )
+        ),
+        navbarMenu("Otros",
+                 tabPanel("Pagina 1"),
+                 tabPanel("Pagina 2")
+        )
+    )
+)
